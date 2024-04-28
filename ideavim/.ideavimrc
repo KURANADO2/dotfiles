@@ -1,0 +1,94 @@
+" Load vim config file
+source ~/.vimrc
+
+" Basic Settings
+" Fixed the problem that p paste cannot import class automatically, https://youtrack.jetbrains.com/issue/VIM-25/VIM-code-paste-should-be-smarter
+set clipboard+=ideaput,unnamed
+
+" Tab switch
+nnoremap E gT
+nnoremap R gt
+nnoremap W 1gt
+" nnoremap T $gt
+nnoremap T 1gtgT
+
+" Plugins
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'preservim/nerdtree'
+
+" Input method
+" IdeaVimExtension
+set keep-english-in-normal-and-restore-in-insert
+let context_aware=1
+
+" vim-multiple-cursors
+set multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+" nmap <C-a> <Plug>AllWholeOccurrences
+" xmap <C-a> <Plug>AllWholeOccurrences
+nmap <C-s> <Plug>SkipOccurrence
+xmap <C-s> <Plug>SkipOccurrence
+nmap <C-p> <Plug>RemoveOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+" IdeaVim-EasyMotion
+set easymotion
+map <Leader> <Plug>(easymotion-prefix)
+" Search for full-screen words
+map <Leader>w <Plug>(easymotion-bd-w)
+" Search for full-screen matches
+map <Leader>f <Plug>(easymotion-s)
+
+" IDEA action
+" Window
+map tt <Action>(ActivateProjectToolWindow)
+map ss <Action>(SelectInProjectView)
+
+" Project
+map tp <Action>(ManageRecentProjects)
+
+" Coding
+map <leader>r <Action>(RenameElement)
+" map sn <Action>(GotoNextError)
+" map sp <Action>(GotoPreviousError)
+" Equal ⌘ + ⌥ + Left
+map <C-o> <Action>(Back)
+" Equal ⌘ + ⌥ + Right
+map <C-i> <Action>(Forward)
+map <leader>e <Action>(ShowErrorDescription)
+map <leader>a <Action>(Annotate)
+" File outline
+map <leader>o <Action>(FileStructurePopup)
+map gi <Action>(GotoImplementation)
+map gd <Action>(GotoDeclaration)
+
+" Git
+" Equal ⌥ + F1
+map ge <Action>(Git.Branches)
+map gh <Action>(Vcs.ShowTabbedFileHistory)
+vmap gh <Action>(Vcs.ShowHistoryForBlock)
+
+" Bookmarks
+" Bookmark list Equal ⇧ + F11
+map ml <Action>(ShowBookmarks)
+map me <Action>(GotoNextBookmark)
+map mb <Action>(GotoPreviousBookmark)
+map mm <Action>(ToggleBookmark)
+
+" Debug
+map <leader>d <Action>(RunDashboard.Debug)
+" Equal ⌘ + F8
+map <leader>b <Action>(ToggleLineBreakpoint)
+
+" Stop
+map <leader>s <Action>(Stop)
+
+" View mode
+map <leader>z <Action>(ToggleZenMode)
+
+" Close project
+map Q <Action>(CloseProject)
