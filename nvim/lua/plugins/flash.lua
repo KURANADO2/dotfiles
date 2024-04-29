@@ -1,4 +1,4 @@
 return {
-  "ggandor/flit.nvim",
+  "folke/flash.nvim",
   enabled = false,
 }
