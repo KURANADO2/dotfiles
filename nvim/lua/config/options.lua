@@ -8,3 +8,4 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 -- Nowrap
 vim.opt.wrap = false
+vim.opt.jumpoptions = "stack"

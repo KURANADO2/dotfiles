@@ -12,3 +12,9 @@ ln -sf ~/Code/GitHub/dotfiles/nvim ~/.config/nvim
 ln -sf ~/Code/GitHub/dotfiles/zsh/.zshrc ~/.zshrc
 ln -sf ~/Code/GitHub/dotfiles/p10k/.p10k.zsh ~/.p10k.zsh
 ```
+
+## Update Lazyvim
+
+```
+:Lazy update
+```
