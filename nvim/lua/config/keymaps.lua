@@ -52,8 +52,14 @@ vim.keymap.set("n", "K", "5<C-y>", opt)
 vim.keymap.set("n", "H", "50zh", opt)
 vim.keymap.set("n", "L", "50zl", opt)
 
+-- 在代码行末尾补全分号
+vim.keymap.set("n", "<LEADER>;", "A;<ESC>", opt)
+
 -- 大小写
 vim.keymap.set("", "`", "~", opt)
+
+-- 替换
+vim.keymap.set("n", "\\s", ":%s///g<left><left><left>")
 
 -- 录制宏
 vim.keymap.set("n", "sg", "q", opt)
