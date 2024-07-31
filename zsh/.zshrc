@@ -24,6 +24,9 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-syntax-highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# starship
+# eval "$(starship init zsh)"
+
 # Alias
 # ls
 alias ll='ls -l'
@@ -91,6 +94,9 @@ alias poff='unset https_proxy; unset http_proxy; unset all_proxy;'
 
 # gsed
 alias sed='gsed'
+
+# yazi
+alias yi='yazi'
 
 # Environment Variables
 # Maven
