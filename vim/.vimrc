@@ -167,6 +167,9 @@ noremap # #zz
 noremap n nzz
 noremap N Nzz
 
+" Add semicolon at end-of-line
+noremap <LEADER>; A;<ESC>
+
 " Cancel search highlight
 map <LEADER><CR> :nohlsearch<CR>
 
