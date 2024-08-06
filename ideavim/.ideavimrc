@@ -21,8 +21,9 @@ Plug 'preservim/nerdtree'
 
 " Input method
 " IdeaVimExtension
-set keep-english-in-normal-and-restore-in-insert
-let context_aware=1
+" set keep-english-in-normal-and-restore-in-insert
+" let context_aware=1
+set keep-english-in-normal
 
 " vim-multiple-cursors
 set multiple-cursors
