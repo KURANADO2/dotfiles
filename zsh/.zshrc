@@ -34,6 +34,8 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias ll='ls -l'
 alias l='ll'
 alias la='l -a'
+alias lh='l -h'
+alias lha='l -ha'
 
 # Tmux
 alias tnew='tmux new -s'
@@ -74,7 +76,7 @@ alias k='kubectl'
 alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
 alias kp='kubectl get pods'
 alias kl='kubectl logs'
-alias klf='kubectl logs -f'
+alias klf='kubectl logs -f --tail=100'
 alias kd='kubectl describe pod'
 
 # Docker
@@ -122,7 +124,8 @@ export GO_HOME='/usr/local/go'
 export RUST_HOME='/Users/jing/.cargo'
 
 # mysql-client
-export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client'
+# export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client'
+export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client@8.4'
 # Prompt
 export MYSQL_PS1="\u@\h [\d]> "
 
