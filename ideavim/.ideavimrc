@@ -92,6 +92,7 @@ map <leader>s <Action>(Stop)
 map <leader>z <Action>(ToggleZenMode)
 
 " Close other tabs
+map ca <Action>(CloseAllEditors)
 map co <Action>(CloseAllEditorsButActive)
 map cl <Action>(CloseAllToTheRight)
 map ch <Action>(CloseAllToTheLeft)
