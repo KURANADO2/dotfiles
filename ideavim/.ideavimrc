@@ -91,11 +91,19 @@ map <leader>s <Action>(Stop)
 " View mode
 map <leader>z <Action>(ToggleZenMode)
 
-" Close other tabs
+" Close all tabs
 map ca <Action>(CloseAllEditors)
+" Close other tabs
 map co <Action>(CloseAllEditorsButActive)
+" Close right tabs
 map cl <Action>(CloseAllToTheRight)
+" Close left tabs
 map ch <Action>(CloseAllToTheLeft)
 
 " Close project
 map Q <Action>(CloseProject)
+
+" Move to next vcs change
+map gj <Action>(VcsShowNextChangeMarker)
+" Move to prev vcs change
+map gk <Action>(VcsShowPrevChangeMarker)
