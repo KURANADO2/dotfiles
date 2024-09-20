@@ -31,6 +31,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias
 # ls
+alias ls='exa'
 alias ll='ls -l'
 alias l='ll'
 alias la='l -a'
@@ -103,12 +104,15 @@ alias sed='gsed'
 alias yi='yazi'
 
 # Environment Variables
+# tldr
+export TLDR_AUTO_UPDATE_DISABLED
+
 # Maven
 export M2_HOME='/Users/jing/Opt/apache-maven-3.9.0'
 
 # Java
 export JDK8_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_361.jdk/Contents/Home'
-export JDK11_HOME='/Library/Java/JavaVirtualMachines/jdk-11.0.16.1.jdk/Contents/Home'
+export JDK11_HOME='/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home'
 export JDK17_HOME='/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home'
 
 export JAVA_HOME=$JDK8_HOME
