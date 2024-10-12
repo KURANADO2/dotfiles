@@ -17,7 +17,7 @@ You can use the `:actionlist` command in vim to list all IDEA actions, then you 
 
 You can double click shift in IDEA -> search 'ideavim' -> open the 'Track Action IDs' switch, and then you will find that all the actions you do in idea will show the corresponding action id in the lower right corner
 
-![](./img/scscreenshot-20241012-172411.png)
+![](./img/screenshot-20241012-172411.png)
 
 ![](./img/screenshot-20241012-172912.png)
 
