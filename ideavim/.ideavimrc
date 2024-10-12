@@ -107,3 +107,6 @@ map Q <Action>(CloseProject)
 map gj <Action>(VcsShowNextChangeMarker)
 " Move to prev vcs change
 map gk <Action>(VcsShowPrevChangeMarker)
+
+" Move to opposite group
+map mo <Action>(MoveEditorToOppositeTabGroup)
