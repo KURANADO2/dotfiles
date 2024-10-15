@@ -61,6 +61,9 @@ vim.keymap.set("", "`", "~", opt)
 -- 替换
 vim.keymap.set("n", "\\s", ":%s///g<left><left><left>")
 
+-- 删除文件中所有空行
+vim.keymap.set("n", "\\d", ":g/^\\s*$/d<CR>")
+
 -- 录制宏
 vim.keymap.set("n", "sg", "q", opt)
 
