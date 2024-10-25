@@ -112,4 +112,4 @@ map gk <Action>(VcsShowPrevChangeMarker)
 map mo <Action>(MoveEditorToOppositeTabGroup)
 
 " Open tab in new window
-map W <Action>(EditSourceInNewWindow)
+map mw <Action>(EditSourceInNewWindow)
