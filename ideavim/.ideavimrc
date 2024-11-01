@@ -66,6 +66,7 @@ map <leader>a <Action>(Annotate)
 map <leader>o <Action>(FileStructurePopup)
 map gi <Action>(GotoImplementation)
 map gd <Action>(GotoDeclaration)
+map gu <Action>(GotoSuperMethod)
 
 " Git
 " Equal ⌥ + F1
@@ -113,3 +114,6 @@ map mo <Action>(MoveEditorToOppositeTabGroup)
 
 " Open tab in new window
 map mw <Action>(EditSourceInNewWindow)
+
+" Change splitter orientation
+map sr <Action>(ChangeSplitOrientation)
