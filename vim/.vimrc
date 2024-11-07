@@ -146,8 +146,6 @@ map ` ~
 " Indent
 noremap > >>
 noremap < <<
-vnoremap > >gv
-vnoremap < <gv
 
 " redo
 noremap U <C-r>
