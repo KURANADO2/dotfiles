@@ -143,6 +143,10 @@ noremap X kdd
 " Toggle case
 map ` ~
 
+" Indent
+noremap > >>
+noremap < <<
+
 " redo
 noremap U <C-r>
 
