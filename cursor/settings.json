@@ -1,0 +1,248 @@
+{
+    "[javascript]": {
+        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "cmake.configureOnOpen": true,
+    "editor.accessibilitySupport": "off",
+    "editor.detectIndentation": false,
+    "editor.fontFamily": "Jebtrains Mono",
+    "editor.fontSize": 16,
+    "editor.minimap.enabled": false,
+    "editor.mouseWheelZoom": false,
+    "editor.smoothScrolling": false,
+    "editor.suggestSelection": "first",
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.lineNumbers": "relative",
+    "explorer.confirmDelete": false,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.factorypath": true,
+        "**/.project": true,
+        "**/.settings": true
+    },
+    "mssql.connections": [
+        {
+            "database": "{{put-database-name-here}}",
+            "password": "",
+            "server": "{{put-server-name-here}}",
+            "user": "{{put-username-here}}"
+        }
+    ],
+    "terminal.integrated.env.osx": {
+        "FIG_NEW_SESSION": "1",
+        "Q_NEW_SESSION": "1"
+    },
+    "terminal.integrated.fontFamily": "Meslo LG M for Powerline",
+    "terminal.integrated.fontSize": 14,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#0000FF",
+        "editor.selectionHighlightBackground": "#0000FF",
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    },
+    "workbench.editor.showTabs": "multiple",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.sideBar.location": "left",
+    "workbench.startupEditor": "newUntitledFile",
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false,
+    "vim.commandLineModeKeyBindings": [],
+    "editor.fontWeight": "normal",
+    "vim.vimrc.path": "$HOME/.vimrc",
+    "vim.vimrc.enable": true,
+    "workbench.colorTheme": "One Dark Pro",
+    "oneDarkPro.editorTheme": "VS Code",
+    "vim.highlightedyank.enable": true,
+    "vim.visualModeKeyBindingsNonRecursive": [],
+    "vim.digraphs": {},
+    "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.ABC",
+    "vim.autoSwitchInputMethod.enable": true,
+    "vim.autoSwitchInputMethod.obtainIMCmd": "/opt/homebrew/bin/im-select",
+    "vim.autoSwitchInputMethod.switchIMCmd": "/opt/homebrew/bin/im-select {im}",
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.smartRelativeLine": true,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "s",
+                "h"
+            ],
+            "commands": [
+                "workbench.action.splitEditorLeft",
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "l"
+            ],
+            "commands": [
+                "workbench.action.splitEditorRight",
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "j"
+            ],
+            "commands": [
+                "workbench.action.splitEditorDown",
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "k"
+            ],
+            "commands": [
+                "workbench.action.splitEditorUp",
+            ]
+        },
+        {
+            "before": [
+                "m",
+                "m"
+            ],
+            "commands": [
+                "bookmarks.toggle"
+            ]
+        },
+        {
+            "before": [
+                "m",
+                "l"
+            ],
+            "commands": [
+                "bookmarks.listFromAllFiles"
+            ]
+        },
+        {
+            "before": [
+                "m",
+                "c"
+            ],
+            "commands": [
+                "bookmarks.clearFromAllFiles"
+            ]
+        },
+        {
+            "before": [
+                "\\",
+                "s"
+            ],
+            "commands": [
+                ":nohl",
+            ]
+        },
+        {
+            "before": [
+                "E"
+            ],
+            "commands": [
+                ":tabp",
+            ]
+        },
+        {
+            "before": [
+                "R"
+            ],
+            "commands": [
+                ":tabn",
+            ]
+        },
+        {
+            "before": [
+                "c",
+                "h"
+            ],
+            "commands": [
+                "workbench.action.closeEditorsToTheLeft",
+            ]
+        },
+        {
+            "before": [
+                "c",
+                "l"
+            ],
+            "commands": [
+                "workbench.action.closeEditorsToTheRight",
+            ]
+        },
+        {
+            "before": [
+                "c",
+                "o"
+            ],
+            "commands": [
+                "workbench.action.closeOtherEditors",
+            ]
+        },
+        {
+            "before": [
+                "m",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.copyEditorToNewWindow",
+            ]
+        },
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<C-h>"
+            ],
+            "after": [
+                "^"
+            ]
+        },
+        {
+            "before": [
+                "<C-l>"
+            ],
+            "after": [
+                "$"
+            ]
+        },
+    ],
+    "editor.lineHeight": 1.3,
+    "files.autoSave": "onFocusChange"
+}
