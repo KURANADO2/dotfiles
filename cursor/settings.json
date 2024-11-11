@@ -15,7 +15,7 @@
     "editor.accessibilitySupport": "off",
     "editor.detectIndentation": false,
     "editor.fontFamily": "Jebtrains Mono",
-    "editor.fontSize": 16,
+    "editor.fontSize": 13,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": false,
     "editor.smoothScrolling": false,
@@ -60,7 +60,6 @@
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter.notebook.ipynb"
     },
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.sideBar.location": "left",
     "workbench.startupEditor": "newUntitledFile",
     "window.commandCenter": false,
@@ -69,7 +68,7 @@
     "editor.fontWeight": "normal",
     "vim.vimrc.path": "$HOME/.vimrc",
     "vim.vimrc.enable": true,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Default Dark Modern",
     "oneDarkPro.editorTheme": "VS Code",
     "vim.highlightedyank.enable": true,
     "vim.visualModeKeyBindingsNonRecursive": [],
@@ -244,13 +243,34 @@
         },
         {
             "before": [
-                "s", "s"
+                "s",
+                "s"
             ],
             "commands": [
                 "workbench.explorer.fileView.focus"
             ]
         },
+        {
+            "before": [
+                "t",
+                "p"
+            ],
+            "commands": [
+                "workbench.action.openRecent"
+            ]
+        },
+        {
+            "before": [
+                "Q"
+            ],
+            "commands": [
+                "workbench.action.closeWindow"
+            ]
+        },
     ],
     "editor.lineHeight": 1.3,
-    "files.autoSave": "onFocusChange"
+    "files.autoSave": "onFocusChange",
+    "workbench.statusBar.visible": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "breadcrumbs.enabled": false
 }
