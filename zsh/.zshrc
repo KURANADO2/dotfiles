@@ -103,6 +103,9 @@ alias sed='gsed'
 # yazi
 alias yi='yazi'
 
+# pbcopy
+alias pb='pbcopy'
+
 # Environment Variables
 # tldr
 export TLDR_AUTO_UPDATE_DISABLED
