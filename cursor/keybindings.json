@@ -118,10 +118,6 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "cmd+n",
-        "command": "workbench.action.quickOpen"
-    },
-    {
         "key": "cmd+p",
         "command": "-workbench.action.quickOpen"
     },
@@ -214,5 +210,47 @@
     {
         "key": "cmd+7",
         "command": "outline.focus"
+    },
+    {
+        "key": "shift+cmd+n",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+.",
+        "command": "-editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "f2",
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorFocus"
+    },
+    {
+        "key": "f8",
+        "command": "-editor.action.marker.nextInFiles",
+        "when": "editorFocus"
+    },
+    {
+        "key": "shift+f2",
+        "command": "editor.action.marker.next",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+f8",
+        "command": "-editor.action.marker.next",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.findInFiles"
+    },
+    {
+        "key": "shift+cmd+f",
+        "command": "-workbench.action.findInFiles"
     },
 ]

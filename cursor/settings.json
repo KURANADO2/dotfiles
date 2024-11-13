@@ -272,5 +272,6 @@
     "files.autoSave": "onFocusChange",
     "workbench.statusBar.visible": false,
     "workbench.iconTheme": "material-icon-theme",
-    "breadcrumbs.enabled": false
+    "breadcrumbs.enabled": false,
+    "explorer.confirmPasteNative": false
 }
