@@ -68,8 +68,7 @@
     "editor.fontWeight": "normal",
     "vim.vimrc.path": "$HOME/.vimrc",
     "vim.vimrc.enable": true,
-    "workbench.colorTheme": "Default Dark Modern",
-    "oneDarkPro.editorTheme": "VS Code",
+    "workbench.colorTheme": "One Dark Pro",
     "vim.highlightedyank.enable": true,
     "vim.visualModeKeyBindingsNonRecursive": [],
     "vim.digraphs": {},
@@ -273,5 +272,6 @@
     "workbench.statusBar.visible": false,
     "workbench.iconTheme": "material-icon-theme",
     "breadcrumbs.enabled": false,
-    "explorer.confirmPasteNative": false
+    "explorer.confirmPasteNative": false,
+    "oneDarkPro.editorTheme": "VS Code"
 }
