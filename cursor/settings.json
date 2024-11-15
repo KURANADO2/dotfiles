@@ -44,7 +44,6 @@
         "FIG_NEW_SESSION": "1",
         "Q_NEW_SESSION": "1"
     },
-    "terminal.integrated.fontFamily": "Meslo LG M for Powerline",
     "terminal.integrated.fontSize": 14,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "workbench.colorCustomizations": {
@@ -273,5 +272,6 @@
     "workbench.iconTheme": "material-icon-theme",
     "breadcrumbs.enabled": false,
     "explorer.confirmPasteNative": false,
-    "oneDarkPro.editorTheme": "VS Code"
+    "oneDarkPro.editorTheme": "VS Code",
+    "terminal.integrated.fontFamily": "MesloLGS NF"
 }
