@@ -14,8 +14,12 @@ nnoremap T 1gtgT
 " Tab move
 " Move current tab to left
 nmap th :tabm-1 <CR>
+" Move current tab to far left
+nmap tH :tabm 0 <CR>
 " Move current tab to right
 nmap tl :tabm+1 <CR>
+" Move current tab to far right
+nmap tL :tabm $<CR>
 
 " Plugins
 Plug 'tpope/vim-surround'
