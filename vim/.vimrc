@@ -187,7 +187,7 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 
 " Record macro
-noremap sg q
+noremap sm q
 
 " Set s no any action
 map s <nop>

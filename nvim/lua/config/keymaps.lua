@@ -65,7 +65,7 @@ vim.keymap.set("n", "\\s", ":%s///g<left><left><left>")
 vim.keymap.set("n", "\\d", ":g/^\\s*$/d<CR>")
 
 -- 录制宏
-vim.keymap.set("n", "sg", "q", opt)
+vim.keymap.set("n", "sm", "q", opt)
 
 -- 重做
 vim.keymap.set("n", "U", "<C-r>", opt)
