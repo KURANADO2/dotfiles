@@ -136,10 +136,6 @@ noremap K 5<C-y>
 noremap H 20zh
 noremap L 20zl
 
-" Combine line
-noremap Z jdd
-noremap X kdd
-
 " Toggle case
 map ` ~
 
