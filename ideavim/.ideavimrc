@@ -82,6 +82,7 @@ map gu <Action>(GotoSuperMethod)
 map ge <Action>(Git.Branches)
 map gh <Action>(Vcs.ShowTabbedFileHistory)
 vmap gh <Action>(Vcs.ShowHistoryForBlock)
+map gc <Action>(CompareClipboardWithSelection)
 
 " Bookmarks
 " Bookmark list Equal ⇧ + F11
