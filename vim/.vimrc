@@ -114,7 +114,7 @@ map <left> :vertical resize-5<CR>
 map <right> :vertical resize+5<CR>
 
 " New tab
-map tn :tabe<CR>
+" map tn :tabe<CR>
 " Next left tab
 map E :-tabnext<CR>
 " Next right tab
