@@ -38,7 +38,7 @@ vim.keymap.set("i", "<C-l>", "<ESC>A", opt)
 
 -- 对调行模式和块模式
 vim.keymap.set("n", "<C-v>", "V", opt)
-vim.keymap.set("n", "V", "<C-v>", opt)
+vim.keymap.set("", "V", "<C-v>", opt)
 
 -- 选中文本
 vim.keymap.set("", "v<C-h>", "v^", opt)

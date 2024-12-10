@@ -159,7 +159,7 @@ noremap v<C-h> v^
 noremap vie ggVG
 " Line visual and Block Visual
 nnoremap <C-v> V
-nnoremap V <C-v>
+noremap V <C-v>
 
 " Display the search results in the middle of the screen
 noremap * *zz
