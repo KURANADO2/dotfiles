@@ -64,6 +64,9 @@ vim.keymap.set("n", "\\s", ":%s///g<left><left><left>")
 -- 删除文件中所有空行
 vim.keymap.set("n", "\\d", ":g/^\\s*$/d<CR>")
 
+-- rest http
+vim.keymap.set("n", "<C-CR>", ":Rest run", opt)
+
 -- 录制宏
 vim.keymap.set("n", "sm", "q", opt)
 
