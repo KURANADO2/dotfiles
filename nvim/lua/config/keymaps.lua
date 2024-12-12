@@ -65,7 +65,7 @@ vim.keymap.set("n", "\\s", ":%s///g<left><left><left>")
 vim.keymap.set("n", "\\d", ":g/^\\s*$/d<CR>")
 
 -- rest http
-vim.keymap.set("n", "<C-CR>", ":Rest run", opt)
+vim.keymap.set("n", "<C-M>", ":Rest run<CR>")
 
 -- 录制宏
 vim.keymap.set("n", "sm", "q", opt)
