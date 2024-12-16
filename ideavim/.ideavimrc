@@ -44,6 +44,8 @@ nmap <C-s> <Plug>SkipOccurrence
 xmap <C-s> <Plug>SkipOccurrence
 nmap <C-p> <Plug>RemoveOccurrence
 xmap <C-p> <Plug>RemoveOccurrence
+" IDEA multiple cursors
+nmap gm vipVxu
 
 " IdeaVim-EasyMotion
 set easymotion
