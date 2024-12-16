@@ -1,5 +1,6 @@
 [manager]
 show_hidden = true
+linemode = "size"
 
 [opener]
 edit = [{ run = 'nvim "$@"', block = true }]
