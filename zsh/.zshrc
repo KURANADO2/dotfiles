@@ -14,6 +14,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# starship
+# eval "$(starship init zsh)"
+
 # autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
@@ -118,7 +121,7 @@ export JDK8_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_361.jdk/Contents/Ho
 export JDK11_HOME='/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home'
 export JDK17_HOME='/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home'
 
-export JAVA_HOME=$JDK8_HOME
+export JAVA_HOME=$JDK17_HOME
 
 alias jdk8='export JAVA_HOME=$JDK8_HOME'
 alias jdk11='export JAVA_HOME=$JDK11_HOME'
