@@ -34,8 +34,8 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias
 # ls
-alias ls='exa'
-alias ll='ls -l'
+alias ls='eza'
+alias ll='ls -l --icons'
 alias l='ll'
 alias la='l -a'
 alias lh='l -h'
