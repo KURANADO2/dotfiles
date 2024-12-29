@@ -174,7 +174,8 @@ noremap <LEADER>; A;<ESC>
 map <LEADER><CR> :nohlsearch<CR>
 
 " Find and replace
-noremap \s :%s/\v//g<left><left><left>
+nnoremap \s :%s/\v//g<left><left><left>
+vnoremap \s :s/\v//g<left><left><left>
 " Global command
 noremap \g :g/\v/<left>
 " Delete all blank lines

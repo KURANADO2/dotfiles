@@ -60,16 +60,17 @@ vim.keymap.set("", "`", "~", opt)
 
 -- 替换
 vim.keymap.set("n", "\\s", ":%s/\\v//g<left><left><left>")
+vim.keymap.set("v", "\\s", ":s/\\v//g<left><left><left>")
 
 -- Global command
-vim.keymap.set("n", "\\g", ":g/\\v/<left>")
+vim.keymap.set("", "\\g", ":g/\\v/<left>")
 
 -- 删除文件中所有空行
-vim.keymap.set("n", "\\d", ":g/\\v^$/d<CR>")
+vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 
 -- Search
-vim.keymap.set("n", "/", "/\\v")
-vim.keymap.set("n", "?", "?\\v")
+vim.keymap.set("", "/", "/\\v")
+vim.keymap.set("", "?", "?\\v")
 
 -- rest http
 vim.keymap.set("n", "<C-M>", ":Rest run<CR>")
