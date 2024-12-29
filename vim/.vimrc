@@ -175,8 +175,10 @@ map <LEADER><CR> :nohlsearch<CR>
 
 " Find and replace
 noremap \s :%s/\v//g<left><left><left>
+" Global command
+noremap \g :g/\v/<left>
 " Delete all blank lines
-noremap \d :g/^\s*$/d<CR>
+noremap \d :g/\v^$/d<CR>
 
 " Command mode cursor movement
 cnoremap <C-a> <Home>

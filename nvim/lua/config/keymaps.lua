@@ -61,8 +61,11 @@ vim.keymap.set("", "`", "~", opt)
 -- 替换
 vim.keymap.set("n", "\\s", ":%s/\\v//g<left><left><left>")
 
+-- Global command
+vim.keymap.set("n", "\\g", ":g/\\v/<left>")
+
 -- 删除文件中所有空行
-vim.keymap.set("n", "\\d", ":g/^\\s*$/d<CR>")
+vim.keymap.set("n", "\\d", ":g/\\v^$/d<CR>")
 
 -- rest http
 vim.keymap.set("n", "<C-M>", ":Rest run<CR>")
