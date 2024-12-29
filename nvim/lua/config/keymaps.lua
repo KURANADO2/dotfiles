@@ -59,7 +59,7 @@ vim.keymap.set("n", "<LEADER>;", "A;<ESC>", opt)
 vim.keymap.set("", "`", "~", opt)
 
 -- 替换
-vim.keymap.set("n", "\\s", ":%s///g<left><left><left>")
+vim.keymap.set("n", "\\s", ":%s/\\v//g<left><left><left>")
 
 -- 删除文件中所有空行
 vim.keymap.set("n", "\\d", ":g/^\\s*$/d<CR>")
