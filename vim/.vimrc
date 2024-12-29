@@ -179,6 +179,9 @@ noremap \s :%s/\v//g<left><left><left>
 noremap \g :g/\v/<left>
 " Delete all blank lines
 noremap \d :g/\v^$/d<CR>
+" Search
+noremap / /\v
+noremap ? ?\v
 
 " Command mode cursor movement
 cnoremap <C-a> <Home>
