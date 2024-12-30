@@ -87,8 +87,8 @@ alias gcherry='git cherry-pick'
 # Lazygit
 alias lg='lazygit'
 
-# Neovim
-alias vim='nvim'
+# Vim and Neovim
+alias vi='nvim'
 
 # K8S
 alias k='kubectl'
