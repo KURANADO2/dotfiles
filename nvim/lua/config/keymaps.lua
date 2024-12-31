@@ -73,7 +73,7 @@ vim.keymap.set("", "/", "/\\v")
 vim.keymap.set("", "?", "?\\v")
 
 -- rest http
-vim.keymap.set("n", "<C-M>", ":Rest run<CR>")
+vim.keymap.set("n", "<C-CR>", ":Rest run<CR>")
 
 -- 录制宏
 vim.keymap.set("n", "sm", "q", opt)
