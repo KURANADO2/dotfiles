@@ -183,6 +183,9 @@ noremap \d :g/\v^$/d<CR>
 " Search
 noremap / /\v
 noremap ? ?\v
+" Normal
+noremap \n :%normal 
+vnoremap \n :normal 
 
 " Command mode cursor movement
 cnoremap <C-a> <Home>

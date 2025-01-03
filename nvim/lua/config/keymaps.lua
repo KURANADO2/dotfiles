@@ -72,6 +72,10 @@ vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 vim.keymap.set("", "/", "/\\v")
 vim.keymap.set("", "?", "?\\v")
 
+-- Normal
+vim.keymap.set("n", "\\n", ":%normal ")
+vim.keymap.set("v", "\\n", ":normal ")
+
 -- rest http
 vim.keymap.set("n", "<C-CR>", ":Rest run<CR>")
 
