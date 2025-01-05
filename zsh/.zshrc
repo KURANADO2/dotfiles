@@ -54,6 +54,12 @@ alias la='l -a'
 alias lh='l -h'
 alias lha='l -ha'
 
+# cp
+alias cp='cp -i'
+
+# mv
+alias mv='mv -i'
+
 # rm
 alias rm='rm -rf'
 
