@@ -64,7 +64,7 @@ map ss <Action>(SelectInProjectView)
 map tp <Action>(ManageRecentProjects)
 
 " Coding
-map <leader>r <Action>(RenameElement)
+map <leader>rn <Action>(RenameElement)
 " map sn <Action>(GotoNextError)
 " map sp <Action>(GotoPreviousError)
 " Equal ⌘ + ⌥ + Left
