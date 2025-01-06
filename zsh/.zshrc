@@ -54,6 +54,9 @@ alias la='l -a'
 alias lh='l -h'
 alias lha='l -ha'
 
+# cd
+alias cd='z'
+
 # cp
 alias cp='cp -i'
 
