@@ -1,6 +1,16 @@
 return {
-  "snacks.nvim",
-  opts = {
-    scroll = { enabled = false },
+  {
+    "snacks.nvim",
+    opts = {
+      scroll = { enabled = false },
+    },
+  },
+  {
+    "folke/flash.nvim",
+    enabled = false,
+  },
+  {
+    "ggandor/flit.nvim",
+    enabled = false,
   },
 }
