@@ -29,9 +29,6 @@ fi
 # zsh-syntax-highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# starship
-# eval "$(starship init zsh)"
-
 # yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -55,7 +52,7 @@ alias lh='l -h'
 alias lha='l -ha'
 
 # cd
-alias cd='z'
+# alias cd='z'
 
 # cp
 alias cp='cp -i'
