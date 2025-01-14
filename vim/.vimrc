@@ -140,8 +140,8 @@ noremap L 20zl
 map ` ~
 
 " Indent
-noremap > >>
-noremap < <<
+" noremap > >>
+" noremap < <<
 
 " redo
 noremap U <C-r>
