@@ -45,6 +45,9 @@ vim.keymap.set("", "v<C-h>", "v^", opt)
 vim.keymap.set("", "v<C-l>", "v$h", opt)
 vim.keymap.set("", "vie", "ggVG", opt)
 
+-- 复制文本
+vim.keymap.set("", "yie", "ggVGy", opt)
+
 -- 上下翻页
 vim.keymap.set("n", "J", "5<C-e>", opt)
 vim.keymap.set("n", "K", "5<C-y>", opt)

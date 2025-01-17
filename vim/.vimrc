@@ -157,6 +157,7 @@ vnoremap p "_dP
 noremap v<C-l> v$h
 noremap v<C-h> v^
 noremap vie ggVG
+noremap yie ggVGy
 " Line visual and Block Visual
 nnoremap <C-v> V
 noremap V <C-v>
