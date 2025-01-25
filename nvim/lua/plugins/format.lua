@@ -6,6 +6,7 @@ return {
       fish = { "fish_indent" },
       sh = { "shfmt" },
       json = { "jq" },
+      html = { "htmlbeautifier" },
     },
   },
 }
