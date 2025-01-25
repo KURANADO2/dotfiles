@@ -13,4 +13,8 @@ return {
     "ggandor/flit.nvim",
     enabled = false,
   },
+  {
+    "mini.ai",
+    enabled = false,
+  },
 }
