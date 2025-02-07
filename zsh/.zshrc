@@ -90,6 +90,9 @@ alias gmerge='git merge'
 alias gbranch='git branch'
 alias gcherry='git cherry-pick'
 
+# ssh
+alias ssh='kitten ssh'
+
 # Lazygit
 alias lg='lazygit'
 
