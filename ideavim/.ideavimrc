@@ -21,6 +21,11 @@ nmap tl :tabm+1 <CR>
 " Move current tab to far right
 nmap tL :tabm $<CR>
 
+" Split and move right
+map ml <Action>(MoveTabRight)
+" Split and move down
+map mj <Action>(MoveTabDown)
+
 " Plugins
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
@@ -75,12 +80,11 @@ map <leader>e <Action>(ShowErrorDescription)
 map <leader>a <Action>(Annotate)
 " File outline
 map <leader>o <Action>(FileStructurePopup)
-map gI <Action>(GotoImplementation)
+map gi <Action>(GotoImplementation)
 map gd <Action>(GotoDeclaration)
 map gu <Action>(GotoSuperMethod)
 
 " Git
-" Equal ⌥ + F1
 map ge <Action>(Git.Branches)
 map gh <Action>(Vcs.ShowTabbedFileHistory)
 vmap gh <Action>(Vcs.ShowHistoryForBlock)
@@ -88,7 +92,7 @@ map gc <Action>(CompareClipboardWithSelection)
 
 " Bookmarks
 " Bookmark list Equal ⇧ + F11
-map ml <Action>(ShowBookmarks)
+map ms <Action>(ShowBookmarks)
 map me <Action>(GotoNextBookmark)
 map mb <Action>(GotoPreviousBookmark)
 map mm <Action>(ToggleBookmark)
@@ -112,6 +116,8 @@ nmap co <Action>(CloseAllEditorsButActive)
 nmap cl <Action>(CloseAllToTheRight)
 " Close left tabs
 nmap ch <Action>(CloseAllToTheLeft)
+" Close all tabs in group
+nmap cg <Action>(CloseAllEditors)
 
 " Close project
 map Q <Action>(CloseProject)
