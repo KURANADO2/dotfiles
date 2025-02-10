@@ -28,9 +28,9 @@ nmap <D-S-.> :tabm+1 <CR>
 nmap tL :tabm $<CR>
 
 " Split and move right
-map ml <Action>(MoveTabRight)
+" map ml <Action>(MoveTabRight)
 " Split and move down
-map mj <Action>(MoveTabDown)
+" map mj <Action>(MoveTabDown)
 
 " Plugins
 Plug 'tpope/vim-surround'
@@ -99,7 +99,7 @@ map gc <Action>(CompareClipboardWithSelection)
 
 " Bookmarks
 " Bookmark list Equal ⇧ + F11
-map ms <Action>(ShowBookmarks)
+map ml <Action>(ShowBookmarks)
 map me <Action>(GotoNextBookmark)
 map mb <Action>(GotoPreviousBookmark)
 map mm <Action>(ToggleBookmark)
