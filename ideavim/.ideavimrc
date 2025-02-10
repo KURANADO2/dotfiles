@@ -86,6 +86,7 @@ map <leader>e <Action>(ShowErrorDescription)
 map <leader>a <Action>(Annotate)
 " File outline
 map <leader>o <Action>(FileStructurePopup)
+nnoremap gI gi
 map gi <Action>(GotoImplementation)
 map gd <Action>(GotoDeclaration)
 map gu <Action>(GotoSuperMethod)
