@@ -44,7 +44,7 @@ eval "$(zoxide init zsh)"
 
 # Alias
 # ls
-alias ls='eza'
+alias ls='eza --hyperlink'
 alias ll='ls -l --icons'
 alias l='ll'
 alias la='l -a'
