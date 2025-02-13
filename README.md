@@ -14,6 +14,7 @@ ln -sf ~/Code/GitHub/dotfiles/p10k/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/Code/GitHub/dotfiles/cursor/settings.json ~/Library/Application\ Support/Cursor/User/settings.json
 ln -sf ~/Code/GitHub/dotfiles/cursor/keybindings.json ~/Library/Application\ Support/Cursor/User/keybindings.json
 ln -sf ~/Code/GitHub/dotfiles/yazi ~/.config/yazi
+ln -sf ~/Code/GitHub/dotfiles/starship/starship.toml ~/.config/starship.toml
 ```
 
 ## Update Lazyvim
