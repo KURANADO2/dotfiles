@@ -16,4 +16,31 @@ disabled = true
 truncation_length = 0
 truncation_symbol = '…/'
 truncate_to_repo = false
+style = 'bold #82AAFF'
 
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[git_status]
+style = 'bold #82AAFF'
+
+[java]
+format = '[${symbol}(${version} )]($style)'
+
+[rust]
+format = '[$symbol($version )]($style)'
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[nodejs]
+format = '[$symbol($version )]($style)'
+
+[lua]
+format = '[$symbol($version )]($style)'
+
+[golang]
+format = '[$symbol($version )]($style)'
+
+[c]
+format = '[$symbol($version(-$name) )]($style)'
