@@ -1,6 +1,11 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+right_format = """
+$cmd_duration\
+$env_var
+"""
+
 # Inserts a blank line between shell prompts
 add_newline = false
 
@@ -13,6 +18,7 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 disabled = true
 
 [directory]
+format = '🍅[$path]($style)[$read_only]($read_only_style) '
 truncation_length = 0
 truncation_symbol = '…/'
 truncate_to_repo = false
@@ -22,6 +28,15 @@ style = 'bold #82AAFF'
 format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_status]
+style = 'bold #82AAFF'
+
+[cmd_duration]
+format = '[$duration]($style) '
+
+[env_var.all_proxy]
+variable = 'all_proxy'
+format = '[$env_value]($style)'
+default = ''
 style = 'bold #82AAFF'
 
 [java]
