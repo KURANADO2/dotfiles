@@ -179,6 +179,8 @@ nnoremap \s :%s/\v//g<left><left><left>
 vnoremap \s :s/\v//g<left><left><left>
 " Global command
 noremap \g :g/\v/<left>
+" Invert match
+noremap \v :v/\v/<left>
 " Delete all blank lines
 noremap \d :g/\v^$/d<CR>
 " Search

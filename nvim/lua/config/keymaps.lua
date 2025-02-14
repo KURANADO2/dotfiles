@@ -64,6 +64,8 @@ vim.keymap.set("v", "\\s", ":s/\\v//g<left><left><left>")
 
 -- Global command
 vim.keymap.set("", "\\g", ":g/\\v/<left>")
+-- Invert match
+vim.keymap.set("", "\\v", ":v/\\v/<left>")
 
 -- 删除文件中所有空行
 vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
@@ -80,7 +82,7 @@ vim.keymap.set("v", "\\n", ":normal ")
 vim.keymap.set("n", "<C-CR>", ":Rest run<CR>")
 
 -- 录制宏
-vim.keymap.set("n", "sm", "q", opt)
+vim.keymap.set("", "sm", "q", opt)
 
 -- 重做
 vim.keymap.set("n", "U", "<C-r>", opt)
