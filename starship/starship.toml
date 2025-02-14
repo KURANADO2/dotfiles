@@ -17,8 +17,15 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 [package]
 disabled = true
 
+[os]
+disabled = false
+format = '[$symbol]($style)'
+
+[os.symbols]
+Macos = "🍎 "
+
 [directory]
-format = '🍅[$path]($style)[$read_only]($read_only_style) '
+format = '[$path]($style)[$read_only]($read_only_style) '
 truncation_length = 0
 truncation_symbol = '…/'
 truncate_to_repo = false
@@ -38,6 +45,14 @@ variable = 'all_proxy'
 format = '[$env_value]($style)'
 default = ''
 style = 'bold #82AAFF'
+
+[username]
+disabled = true
+ssh_only = false
+
+[hostname]
+disabled = true
+ssh_only = false
 
 [java]
 format = '[${symbol}(${version} )]($style)'
