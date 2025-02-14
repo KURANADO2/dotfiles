@@ -23,6 +23,7 @@ format = '[$symbol]($style)'
 
 [os.symbols]
 Macos = "🍎 "
+Ubuntu = "󰕈 "
 
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
