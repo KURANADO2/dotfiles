@@ -1,7 +1,7 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-right_format = """
+right_format="""
 $cmd_duration\
 $env_var
 """
@@ -17,18 +17,8 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 [package]
 disabled = true
 
-[os]
-disabled = false
-format = '[$symbol]($style)'
-
-[os.symbols]
-Macos = "🍎 "
-Ubuntu = "󰕈 "
-
 [directory]
-format = '[$path]($style)[$read_only]($read_only_style) '
 truncation_length = 0
-truncation_symbol = '…/'
 truncate_to_repo = false
 style = 'bold #82AAFF'
 
@@ -37,23 +27,6 @@ format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_status]
 style = 'bold #82AAFF'
-
-[cmd_duration]
-format = '[$duration]($style) '
-
-[env_var.all_proxy]
-variable = 'all_proxy'
-format = '[$env_value]($style)'
-default = ''
-style = 'bold #82AAFF'
-
-[username]
-disabled = true
-ssh_only = false
-
-[hostname]
-disabled = true
-ssh_only = false
 
 [java]
 format = '[${symbol}(${version} )]($style)'
@@ -75,3 +48,12 @@ format = '[$symbol($version )]($style)'
 
 [c]
 format = '[$symbol($version(-$name) )]($style)'
+
+[env_var.all_proxy]
+variable = 'all_proxy'
+format = "[$env_value]($style) "
+default = ''
+style = 'bold #82AAFF'
+
+[cmd_duration]
+format = '[$duration]($style) '
