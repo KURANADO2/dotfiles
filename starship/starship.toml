@@ -63,3 +63,9 @@ disabled = true
 
 [username]
 disabled = true
+
+[os]
+disabled = false
+
+[os.symbols]
+Ubuntu = "󰕈 "
