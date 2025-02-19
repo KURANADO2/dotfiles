@@ -113,6 +113,9 @@ alias d='docker'
 alias dp='docker ps'
 alias dpa='docker ps -a'
 
+# Ollama
+alias o='ollama'
+
 # Shadowsocks
 # Enable Terminal Proxy
 # alias pon='export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;'
