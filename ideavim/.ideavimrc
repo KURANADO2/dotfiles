@@ -142,3 +142,6 @@ map mw <Action>(EditSourceInNewWindow)
 
 " Change splitter orientation
 map sr <Action>(ChangeSplitOrientation)
+
+" Format
+map <leader>cf <Action>(ReformatCode)
