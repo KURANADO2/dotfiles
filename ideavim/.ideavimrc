@@ -145,3 +145,9 @@ map sr <Action>(ChangeSplitOrientation)
 
 " Format
 map <leader>cf <Action>(ReformatCode)
+
+" Search files
+map <leader><leader> <Action>(GotoFile)
+
+" Find in files
+map <leader>/ <Action>(FindInPath)
