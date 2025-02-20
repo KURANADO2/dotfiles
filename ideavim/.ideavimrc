@@ -151,3 +151,6 @@ map <leader><leader> <Action>(GotoFile)
 
 " Find in files
 map <leader>/ <Action>(FindInPath)
+
+" Code action
+map <leader>ca <Action>(ShowIntentionActions)
