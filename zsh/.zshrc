@@ -137,6 +137,9 @@ alias yi='yazi'
 # pbcopy
 alias pb='pbcopy'
 
+# musicfox
+alias m='musicfox'
+
 # Environment Variables
 # tldr
 export TLDR_AUTO_UPDATE_DISABLED
