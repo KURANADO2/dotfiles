@@ -49,8 +49,8 @@ let context_aware=1
 set multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
 xmap <C-n> <Plug>NextWholeOccurrence
-nmap <leader><C-n> <Plug>AllOccurrences
-xmap <leader><C-n> <Plug>AllOccurrences
+nmap g<C-n> <Plug>AllOccurrences
+xmap g<C-n> <Plug>AllOccurrences
 nmap <C-s> <Plug>SkipOccurrence
 xmap <C-s> <Plug>SkipOccurrence
 nmap <C-p> <Plug>RemoveOccurrence
