@@ -89,6 +89,8 @@ alias greset='git reset'
 alias gmerge='git merge'
 alias gbranch='git branch'
 alias gcherry='git cherry-pick'
+alias gstash='git stash'
+alias gpop='git stash pop'
 
 # ssh
 alias ssh='kitten ssh'
@@ -107,11 +109,14 @@ alias kp='kubectl get pods'
 alias kl='kubectl logs'
 alias klf='kubectl logs -f --tail=100'
 alias kd='kubectl describe pod'
+alias ke='kubectl exec -it'
 
 # Docker
 alias d='docker'
 alias dp='docker ps'
 alias dpa='docker ps -a'
+alias de='docker exec -it'
+alias di='docker inspect'
 
 # Ollama
 alias o='ollama'
