@@ -70,6 +70,9 @@ vim.keymap.set("", "\\v", ":v/\\v/<left>")
 -- 删除文件中所有空行
 vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 
+-- Align
+vim.keymap.set("", "<LEADER>t", ":Tabular /")
+
 -- Search
 vim.keymap.set("", "/", "/\\v")
 vim.keymap.set("", "?", "?\\v")
