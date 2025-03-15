@@ -105,12 +105,11 @@ map mb <Action>(GotoPreviousBookmark)
 map mm <Action>(ToggleBookmark)
 
 " Debug
-map <leader>d <Action>(RunDashboard.Debug)
+map <leader>d <Action>(ChooseDebugConfiguration)
+" Stop
+map <leader>s <Action>(RunToolbarMainMultipleStopAction)
 " Equal ⌘ + F8
 map <leader>b <Action>(ToggleLineBreakpoint)
-
-" Stop
-map <leader>s <Action>(Stop)
 
 " View mode
 map <leader>z <Action>(ToggleZenMode)
