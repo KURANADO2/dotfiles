@@ -84,6 +84,10 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
+" Use screen lines instead of actual lines
+map j gj
+map k gk
+
 " Move quickly
 noremap <C-j> 5j
 noremap <C-k> 5k
