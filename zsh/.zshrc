@@ -27,8 +27,12 @@ eval "$(starship init zsh)"
 # source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh
+HISTFILE=$HOME/.history
 # Writes the history file sharing history command between all sessions
-setopt share_history
+setopt SHARE_HISTORY
+# History size
+HISTSIZE=50000
+SAVEHIST=50000
 
 # zsh-syntax-highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
