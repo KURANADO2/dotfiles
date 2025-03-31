@@ -26,6 +26,10 @@ eval "$(starship init zsh)"
 # zsh-autosuggestion
 # source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# zsh
+# Writes the history file sharing history command between all sessions
+setopt share_history
+
 # zsh-syntax-highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -84,6 +88,7 @@ alias gcommit='git commit'
 alias gadd='git add'
 alias gremote='git remote'
 alias gcheckout='git checkout'
+alias gcb="git branch | fzf --preview 'git show --color=always {-1}' | cut -c 3- | xargs git checkout"
 alias gclone='git clone'
 alias greset='git reset'
 alias gmerge='git merge'
