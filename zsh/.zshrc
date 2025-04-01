@@ -109,6 +109,7 @@ alias lg='lazygit'
 
 # Neovim
 alias vim='nvim'
+alias v='nvim'
 
 # K8S
 alias k='kubectl'
