@@ -253,4 +253,8 @@
         "key": "shift+cmd+f",
         "command": "-workbench.action.findInFiles"
     },
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
+    },
 ]
