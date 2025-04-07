@@ -28,6 +28,27 @@ format = '[$symbol$branch(:$remote_branch)]($style) '
 [git_status]
 style = 'bold #82AAFF'
 
+[env_var.all_proxy]
+variable = 'all_proxy'
+format = "[$env_value]($style) "
+default = ''
+style = 'bold #82AAFF'
+
+[cmd_duration]
+format = '[$duration]($style) '
+
+[hostname]
+disabled = true
+
+[username]
+disabled = true
+
+[os]
+disabled = false
+
+[os.symbols]
+Ubuntu = "󰕈 "
+
 [java]
 format = '[${symbol}(${version} )]($style)'
 
@@ -49,23 +70,5 @@ format = '[$symbol($version )]($style)'
 [c]
 format = '[$symbol($version(-$name) )]($style)'
 
-[env_var.all_proxy]
-variable = 'all_proxy'
-format = "[$env_value]($style) "
-default = ''
-style = 'bold #82AAFF'
-
-[cmd_duration]
-format = '[$duration]($style) '
-
-[hostname]
-disabled = true
-
-[username]
-disabled = true
-
-[os]
-disabled = false
-
-[os.symbols]
-Ubuntu = "󰕈 "
+[ruby]
+format = '[$symbol($version )]($style)'
