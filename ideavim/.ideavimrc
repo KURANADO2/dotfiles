@@ -71,9 +71,6 @@ map <Leader>f <Plug>(easymotion-s)
 map tt <Action>(ActivateProjectToolWindow)
 map ss <Action>(SelectInProjectView)
 
-" Project
-map tp <Action>(ManageRecentProjects)
-
 " Coding
 map <leader>rn <Action>(RenameElement)
 " map sn <Action>(GotoNextError)
@@ -96,6 +93,12 @@ map ge <Action>(Git.Branches)
 map gh <Action>(Vcs.ShowTabbedFileHistory)
 vmap gh <Action>(Vcs.ShowHistoryForBlock)
 map gc <Action>(CompareClipboardWithSelection)
+" Move to next vcs change
+map gj <Action>(VcsShowNextChangeMarker)
+" Move to prev vcs change
+map gk <Action>(VcsShowPrevChangeMarker)
+" Rollback changes
+map rb <Action>(ChangesView.Revert)
 
 " Bookmarks
 " Bookmark list Equal ⇧ + F11
@@ -122,6 +125,12 @@ map mf <Action>(ToggleBookmarkF)
 map mg <Action>(ToggleBookmarkG)
 map mh <Action>(ToggleBookmarkH)
 
+map <Up> <Action>(ResizeToolWindowUp)
+map <Down> <Action>(ResizeToolWindowDown)
+map <Left> <Action>(ResizeToolWindowLeft)
+map <Right> <Action>(ResizeToolWindowRight)
+
+
 " Debug
 map <leader>d <Action>(ChooseDebugConfiguration)
 " Stop
@@ -136,20 +145,12 @@ map <leader>z <Action>(ToggleZenMode)
 " map ca <Action>(CloseAllEditors)
 " Close other tabs
 nmap co <Action>(CloseAllEditorsButActive)
-" Close right tabs
-nmap cl <Action>(CloseAllToTheRight)
 " Close left tabs
 nmap ch <Action>(CloseAllToTheLeft)
+" Close right tabs
+nmap cl <Action>(CloseAllToTheRight)
 " Close all tabs in group
 nmap cg <Action>(CloseAllEditors)
-
-" Close project
-map Q <Action>(CloseProject)
-
-" Move to next vcs change
-map gj <Action>(VcsShowNextChangeMarker)
-" Move to prev vcs change
-map gk <Action>(VcsShowPrevChangeMarker)
 
 " Move to opposite group
 map mo <Action>(MoveEditorToOppositeTabGroup)
@@ -171,3 +172,9 @@ map <leader>/ <Action>(FindInPath)
 
 " Code action
 map <leader>ca <Action>(ShowIntentionActions)
+
+" Projects
+map tp <Action>(ManageRecentProjects)
+
+" Close project
+map Q <Action>(CloseProject)
