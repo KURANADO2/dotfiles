@@ -34,6 +34,8 @@ vim.keymap.set("", "<C-l>", "$", opt)
 
 -- insert 模式下，跳到行首行尾
 vim.keymap.set("i", "<C-h>", "<ESC>I", opt)
+vim.keymap.set("i", "<C-j>", "<down><down><down><down><down>", opt)
+vim.keymap.set("i", "<C-k>", "<up><up><up><up><up>", opt)
 vim.keymap.set("i", "<C-l>", "<ESC>A", opt)
 
 -- 对调行模式和块模式

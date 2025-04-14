@@ -79,10 +79,14 @@ map <LEADER>rs :source $MYVIMRC<CR>
 " Open .vimrc file in anywhere
 map <LEADER>rc :e ~/.vimrc<CR>
 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+" inoremap <C-h> <Left>
+" inoremap <C-j> <Down>
+" inoremap <C-k> <Up>
+" inoremap <C-l> <Right>
+inoremap <C-h> <Esc>I
+inoremap <C-j> <Down><Down><Down><Down><Down>
+inoremap <C-k> <Up><Up><Up><Up><Up>
+inoremap <C-l> <Esc>A
 
 " Use screen lines instead of actual lines
 noremap j gj
@@ -91,7 +95,6 @@ noremap k gk
 " Move quickly
 noremap <C-j> 5j
 noremap <C-k> 5k
-
 " Go to start of the line
 noremap <C-h> ^
 " Go to end of the line
