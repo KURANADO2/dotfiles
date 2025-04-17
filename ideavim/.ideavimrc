@@ -27,10 +27,11 @@ nmap <D-S-.> :tabm+1 <CR>
 " Move current tab to far right
 nmap tL :tabm $<CR>
 
-" Split and move right
-" map ml <Action>(MoveTabRight)
-" Split and move down
-" map mj <Action>(MoveTabDown)
+" Input method
+" IdeaVimExtension
+set keep-english-in-normal-and-restore-in-insert
+let context_aware=1
+" set keep-english-in-normal
 
 " Plugins
 Plug 'tpope/vim-surround'
@@ -39,11 +40,8 @@ Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-highlightedyank'
 Plug 'preservim/nerdtree'
 
-" Input method
-" IdeaVimExtension
-set keep-english-in-normal-and-restore-in-insert
-let context_aware=1
-" set keep-english-in-normal
+" vim-surround
+set surround
 
 " vim-multiple-cursors
 set multiple-cursors
@@ -103,8 +101,6 @@ map rb <Action>(ChangesView.Revert)
 " Bookmarks
 " Bookmark list Equal ⇧ + F11
 map ml <Action>(ShowBookmarks)
-map me <Action>(GotoNextBookmark)
-map mb <Action>(GotoPreviousBookmark)
 map mm <Action>(ToggleBookmark)
 map m0 <Action>(ToggleBookmark0)
 map m1 <Action>(ToggleBookmark1)
@@ -124,6 +120,8 @@ map me <Action>(ToggleBookmarkE)
 map mf <Action>(ToggleBookmarkF)
 map mg <Action>(ToggleBookmarkG)
 map mh <Action>(ToggleBookmarkH)
+map mj <Action>(GotoNextBookmark)
+map mk <Action>(GotoPreviousBookmark)
 
 map <Up> <Action>(ResizeToolWindowUp)
 map <Down> <Action>(ResizeToolWindowDown)
