@@ -72,6 +72,10 @@ vim.keymap.set("", "\\v", ":v/\\v/<left>")
 -- 删除文件中所有空行
 vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 
+-- Add blank line
+vim.keymap.set("n", "\\r", ":%s/\\v$/\\r/g<CR>")
+vim.keymap.set("v", "\\r", ":s/\\v$/\\r/g<CR>")
+
 -- Align
 vim.keymap.set("", "<LEADER>t", ":Tabular /")
 
