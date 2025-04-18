@@ -96,7 +96,7 @@ map gj <Action>(VcsShowNextChangeMarker)
 " Move to prev vcs change
 map gk <Action>(VcsShowPrevChangeMarker)
 " Rollback changes
-map rb <Action>(ChangesView.Revert)
+map <leader>rb <Action>(ChangesView.Revert)
 
 " Bookmarks
 " Bookmark list Equal ⇧ + F11
