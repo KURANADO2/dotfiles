@@ -102,7 +102,7 @@ alias gstash='git stash'
 alias gpop='git stash pop'
 
 # ssh
-alias ssh='kitten ssh'
+# alias ssh='kitten ssh'
 
 # Lazygit
 alias lg='lazygit'
