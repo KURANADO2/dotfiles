@@ -73,8 +73,8 @@ vim.keymap.set("", "\\v", ":v/\\v/<left>")
 vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 
 -- Add blank line
-vim.keymap.set("n", "\\r", ":%s/\\v$/\\r/g<CR>")
-vim.keymap.set("v", "\\r", ":s/\\v$/\\r/g<CR>")
+vim.keymap.set("n", "\\l", ":%s/\\v$/\\r/g<CR>")
+vim.keymap.set("v", "\\l", ":s/\\v$/\\r/g<CR>")
 
 -- Align
 vim.keymap.set("", "<LEADER>t", ":Tabular /")

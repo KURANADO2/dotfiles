@@ -191,8 +191,8 @@ noremap \v :v/\v/<left>
 " Delete all blank lines
 noremap \d :g/\v^$/d<CR>
 " Add blank line
-nnoremap \r :%s/\v$/\r/g<CR>
-vnoremap \r :s/\v$/\r/g<CR>
+nnoremap \l :%s/\v$/\r/g<CR>
+vnoremap \l :s/\v$/\r/g<CR>
 " Search
 noremap / /\v
 noremap ? ?\v
