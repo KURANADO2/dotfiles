@@ -58,7 +58,6 @@ nmap gm vipVxu
 
 " IdeaVim-EasyMotion
 set easymotion
-map <Leader> <Plug>(easymotion-prefix)
 " Search for full-screen words
 map <Leader>w <Plug>(easymotion-bd-w)
 " Search for full-screen matches
@@ -134,7 +133,10 @@ map <leader>d <Action>(ChooseDebugConfiguration)
 " Stop
 map <leader>s <Action>(RunToolbarMainMultipleStopAction)
 " Equal ⌘ + F8
-map <leader>b <Action>(ToggleLineBreakpoint)
+" Break point add or delete
+map <leader>ba <Action>(ToggleLineBreakpoint)
+" View break point list
+map <leader>bl <Action>(ViewBreakpoints)
 
 " View mode
 map <leader>z <Action>(ToggleZenMode)
