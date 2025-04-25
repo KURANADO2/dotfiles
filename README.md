@@ -1,6 +1,8 @@
 ## Install
 
 ```bash
+export XDG_CONFIG_HOME="$HOME/.config"
+
 git clone git@github.com:KURANADO2/dotfiles.git ~/Code/GitHub/
 
 ln -sf ~/Code/GitHub/dotfiles/kitty ~/.config/kitty
@@ -15,6 +17,7 @@ ln -sf ~/Code/GitHub/dotfiles/cursor/settings.json ~/Library/Application\ Suppor
 ln -sf ~/Code/GitHub/dotfiles/cursor/keybindings.json ~/Library/Application\ Support/Cursor/User/keybindings.json
 ln -sf ~/Code/GitHub/dotfiles/yazi ~/.config/yazi
 ln -sf ~/Code/GitHub/dotfiles/starship/starship.toml ~/.config/starship.toml
+ln -sf ~/Code/GitHub/dotfiles/lazygit ~/.config/lazygit
 ```
 
 ## Update Lazyvim
