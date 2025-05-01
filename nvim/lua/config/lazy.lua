@@ -50,4 +50,8 @@ require("lazy").setup({
       },
     },
   },
+  rocks = {
+    enabled = true,
+    hererocks = true,
+  },
 })
