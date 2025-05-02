@@ -27,6 +27,11 @@ nmap <D-S-.> :tabm+1 <CR>
 " Move current tab to far right
 nmap tL :tabm $<CR>
 
+" Undo and redo
+" https://youtrack.jetbrains.com/issue/VIM-3881/Undo-u-in-IdeaVim-is-broken-on-remote-development-environments
+nmap u <Action>($Undo)
+nmap U <Action>($Redo)
+
 " Input method
 " IdeaVimExtension
 set keep-english-in-normal-and-restore-in-insert
