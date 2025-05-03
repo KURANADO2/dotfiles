@@ -1,285 +1,566 @@
 {
-    "[javascript]": {
-        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
+  "terminal.integrated.env.osx": {
+    "Q_NEW_SESSION": "1"
+  },
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "window.commandCenter": true,
+  "editor.fontFamily": "JetBrains Mono",
+  "markdown.preview.lineHeight": 0.9,
+  "redhat.telemetry.enabled": false,
+  "workbench.colorTheme": "Default Dark Modern",
+  "terminal.external.osxExec": "Kitty.app",
+  "editor.lineNumbers": "relative",
+  // Do not enable .vimrc file, otherwise, vscode vim will encounter some strange problems
+  // "vim.vimrc.enable": true,
+  // leader key 设置为空格
+  "vim.leader": "<space>",
+  // 使用系统剪贴板
+  "vim.useSystemClipboard": true,
+  "vim.highlightedyank.enable": true,
+  // cnoremap
+  "vim.commandLineModeKeyBindingsNonRecursive": [],
+  // imap
+  "vim.insertModeKeyBindings": [],
+  // nnoremap
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "V",
+      ],
+      "after": [
+        "<C-v>"
+      ]
     },
-    "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
+    {
+      "before": [
+        "<C-v>",
+      ],
+      "after": [
+        "V"
+      ]
     },
-    "[python]": {
-        "editor.formatOnType": true
+    {
+      "before": [
+        "<C-j>",
+      ],
+      "after": [
+        "5",
+        "j"
+      ]
     },
-    "[xml]": {
-        "editor.defaultFormatter": "redhat.vscode-xml"
+    {
+      "before": [
+        "<C-k>",
+      ],
+      "after": [
+        "5",
+        "k"
+      ]
     },
-    "cmake.configureOnOpen": true,
-    "editor.accessibilitySupport": "off",
-    "editor.detectIndentation": false,
-    "editor.fontFamily": "Jebtrains Mono",
-    "editor.fontSize": 13,
-    "editor.minimap.enabled": false,
-    "editor.mouseWheelZoom": false,
-    "editor.smoothScrolling": false,
-    "editor.suggestSelection": "first",
-    "editor.unicodeHighlight.nonBasicASCII": false,
-    "editor.lineNumbers": "relative",
-    "explorer.confirmDelete": false,
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
+    {
+      "before": [
+        "<C-h>",
+      ],
+      "after": [
+        "^",
+      ]
     },
-    "files.exclude": {
-        "**/.classpath": true,
-        "**/.factorypath": true,
-        "**/.project": true,
-        "**/.settings": true
+    {
+      "before": [
+        "<C-l>",
+      ],
+      "after": [
+        "$",
+      ]
     },
-    "mssql.connections": [
-        {
-            "database": "{{put-database-name-here}}",
-            "password": "",
-            "server": "{{put-server-name-here}}",
-            "user": "{{put-username-here}}"
-        }
-    ],
-    "terminal.integrated.env.osx": {
-        "FIG_NEW_SESSION": "1",
-        "Q_NEW_SESSION": "1"
+    {
+      "before": [
+        "s",
+        "l",
+      ],
+      "commands": [
+        ":vsp",
+      ]
     },
-    "terminal.integrated.fontSize": 14,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "workbench.colorCustomizations": {
-        "editor.selectionBackground": "#0000FF",
-        "editor.selectionHighlightBackground": "#0000FF",
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f",
-        "statusBar.foreground": "#ffffff",
-        "statusBar.debuggingForeground": "#ffffff"
+    {
+      "before": [
+        "s",
+        "j",
+      ],
+      "commands": [
+        ":sp",
+      ]
     },
-    "workbench.editor.showTabs": "multiple",
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
+    {
+      "before": [
+        "<leader>",
+        "h",
+      ],
+      "after": [
+        "<C-w>",
+        "h",
+      ]
     },
-    "workbench.sideBar.location": "left",
-    "workbench.startupEditor": "newUntitledFile",
-    "window.commandCenter": false,
-    "workbench.layoutControl.enabled": false,
-    "vim.commandLineModeKeyBindings": [],
-    "editor.fontWeight": "normal",
-    "vim.vimrc.path": "$HOME/.vimrc",
-    "vim.vimrc.enable": true,
-    "workbench.colorTheme": "Default Dark+",
-    "vim.highlightedyank.enable": true,
-    "vim.visualModeKeyBindingsNonRecursive": [],
-    "vim.digraphs": {},
-    "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.ABC",
-    "vim.autoSwitchInputMethod.obtainIMCmd": "/opt/homebrew/bin/im-select",
-    "vim.autoSwitchInputMethod.switchIMCmd": "/opt/homebrew/bin/im-select {im}",
-    "vim.leader": "<space>",
-    "vim.useSystemClipboard": true,
-    "vim.smartRelativeLine": true,
-    "vscode-neovim.afterInitConfig": [
-        {
-            "before": [
-                "s",
-                "h"
-            ],
-            "commands": [
-                "workbench.action.splitEditorLeft",
-            ]
-        },
-        {
-            "before": [
-                "s",
-                "l"
-            ],
-            "commands": [
-                "workbench.action.splitEditorRight",
-            ]
-        },
-        {
-            "before": [
-                "s",
-                "j"
-            ],
-            "commands": [
-                "workbench.action.splitEditorDown",
-            ]
-        },
-        {
-            "before": [
-                "s",
-                "k"
-            ],
-            "commands": [
-                "workbench.action.splitEditorUp",
-            ]
-        },
-        {
-            "before": [
-                "m",
-                "m"
-            ],
-            "commands": [
-                "bookmarks.toggle"
-            ]
-        },
-        {
-            "before": [
-                "m",
-                "l"
-            ],
-            "commands": [
-                "bookmarks.listFromAllFiles"
-            ]
-        },
-        {
-            "before": [
-                "m",
-                "c"
-            ],
-            "commands": [
-                "bookmarks.clearFromAllFiles"
-            ]
-        },
-        {
-            "before": [
-                "\\",
-                "s"
-            ],
-            "commands": [
-                ":nohl",
-            ]
-        },
-        {
-            "before": [
-                "E"
-            ],
-            "commands": [
-                ":tabp",
-            ]
-        },
-        {
-            "before": [
-                "R"
-            ],
-            "commands": [
-                ":tabn",
-            ]
-        },
-        {
-            "before": [
-                "c",
-                "h"
-            ],
-            "commands": [
-                "workbench.action.closeEditorsToTheLeft",
-            ]
-        },
-        {
-            "before": [
-                "c",
-                "l"
-            ],
-            "commands": [
-                "workbench.action.closeEditorsToTheRight",
-            ]
-        },
-        {
-            "before": [
-                "c",
-                "o"
-            ],
-            "commands": [
-                "workbench.action.closeOtherEditors",
-            ]
-        },
-        {
-            "before": [
-                "m",
-                "w"
-            ],
-            "commands": [
-                "workbench.action.copyEditorToNewWindow",
-            ]
-        },
-    ],
-    "vim.visualModeKeyBindings": [
-        {
-            "before": [
-                ">"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
-        },
-        {
-            "before": [
-                "<"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
-        },
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<C-h>"
-            ],
-            "after": [
-                "^"
-            ]
-        },
-        {
-            "before": [
-                "<C-l>"
-            ],
-            "after": [
-                "$"
-            ]
-        },
-        {
-            "before": [
-                "s",
-                "s"
-            ],
-            "commands": [
-                "workbench.explorer.fileView.focus"
-            ]
-        },
-        {
-            "before": [
-                "t",
-                "p"
-            ],
-            "commands": [
-                "workbench.action.openRecent"
-            ]
-        },
-        {
-            "before": [
-                "Q"
-            ],
-            "commands": [
-                "workbench.action.closeWindow"
-            ]
-        },
-        {
-            "before": [
-                "<C-/>"
-            ],
-            "commands": [
-                "editor.action.commentLine"
-            ]
-        },
-    ],
-    "editor.lineHeight": 1.3,
-    "files.autoSave": "onFocusChange",
-    "workbench.iconTheme": "material-icon-theme",
-    "breadcrumbs.enabled": false,
-    "explorer.confirmPasteNative": false,
-    "oneDarkPro.editorTheme": "VS Code",
-    "terminal.integrated.fontFamily": "MesloLGS NF",
-    "vim.autoSwitchInputMethod.enable": true,
-    "workbench.statusBar.visible": false
+    {
+      "before": [
+        "<leader>",
+        "j",
+      ],
+      "after": [
+        "<C-w>",
+        "j",
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "k",
+      ],
+      "after": [
+        "<C-w>",
+        "k",
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "l",
+      ],
+      "after": [
+        "<C-w>",
+        "l",
+      ]
+    },
+    {
+      "before": [
+        "J",
+      ],
+      "after": [
+        "5",
+        "<C-e>"
+      ]
+    },
+    {
+      "before": [
+        "K",
+      ],
+      "after": [
+        "5",
+        "<C-y>"
+      ]
+    },
+    {
+      "before": [
+        "H",
+      ],
+      "after": [
+        "2",
+        "0",
+        "z",
+        "h"
+      ]
+    },
+    {
+      "before": [
+        "L",
+      ],
+      "after": [
+        "20zl"
+      ]
+    },
+    // Toggle case
+    {
+      "before": [
+        "`",
+      ],
+      "after": [
+        "~"
+      ]
+    },
+    // Redo
+    {
+      "before": [
+        "U",
+      ],
+      "after": [
+        "<C-r>"
+      ]
+    },
+    // Format codes
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "f"
+      ],
+      "commands": [
+        "editor.action.formatDocument"
+      ]
+    },
+    // Copy
+    {
+      "before": [
+        "Y",
+      ],
+      "after": [
+        "v",
+        "$",
+        "h",
+        "y"
+      ]
+    },
+    {
+      "before": [
+        "v",
+        "<C-l>",
+      ],
+      "after": [
+        "v",
+        "$",
+        "h",
+      ]
+    },
+    {
+      "before": [
+        "v",
+        "<C-h>",
+      ],
+      "after": [
+        "v",
+        "^",
+      ]
+    },
+    {
+      "before": [
+        "v",
+        "i",
+        "e",
+      ],
+      "after": [
+        "g",
+        "g",
+        "V",
+        "G",
+      ]
+    },
+    {
+      "before": [
+        "*"
+      ],
+      "after": [
+        "*",
+        "z",
+        "z",
+      ]
+    },
+    {
+      "before": [
+        "#"
+      ],
+      "after": [
+        "#",
+        "z",
+        "z",
+      ]
+    },
+    {
+      "before": [
+        "n"
+      ],
+      "after": [
+        "n",
+        "z",
+        "z",
+      ]
+    },
+    {
+      "before": [
+        "N"
+      ],
+      "after": [
+        "N",
+        "z",
+        "z",
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        ";"
+      ],
+      "after": [
+        "A",
+        ";",
+        "<esc>"
+      ]
+    },
+    // Set s no any action
+    {
+      "before": [
+        "s"
+      ],
+      "after": [
+        "<nop>"
+      ]
+    },
+    // Set s no any action
+    {
+      "before": [
+        "\\",
+        "s"
+      ],
+      "after": [
+        ""
+      ]
+    },
+    // Rename
+    {
+      "before": [
+        "<leader>",
+        "r",
+        "n"
+      ],
+      "commands": [
+        "editor.action.rename"
+      ]
+    },
+    // Hover
+    {
+      "before": [
+        "<leader>",
+        "e"
+      ],
+      "commands": [
+        "editor.action.showHover"
+      ]
+    },
+    // Quick open
+    {
+      "before": [
+        "<leader>",
+        "<leader>"
+      ],
+      "commands": [
+        "workbench.action.quickOpen"
+      ]
+    },
+    // Keyword search
+    {
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "commands": [
+        "workbench.action.findInFiles"
+      ]
+    },
+    // Previous tab
+    {
+      "before": [
+        "E"
+      ],
+      "commands": [
+        "workbench.action.previousEditorInGroup"
+      ]
+    },
+    // Next tab
+    {
+      "before": [
+        "R"
+      ],
+      "commands": [
+        "workbench.action.nextEditorInGroup"
+      ]
+    },
+    // First tab
+    {
+      "before": [
+        "W"
+      ],
+      "commands": [
+        "workbench.action.firstEditorInGroup"
+      ]
+    },
+    // Last tab
+    {
+      "before": [
+        "T"
+      ],
+      "commands": [
+        "workbench.action.lastEditorInGroup"
+      ]
+    },
+    // Recent projects
+    {
+      "before": [
+        "t",
+        "p"
+      ],
+      "commands": [
+        "workbench.action.openRecent"
+      ]
+    },
+    // Reveal in explorer view
+    {
+      "before": [
+        "s",
+        "s"
+      ],
+      "commands": [
+        "workbench.files.action.showActiveFileInExplorer"
+      ]
+    },
+    // Go back
+    {
+      "before": [
+        "<ctrl-o>",
+      ],
+      "commands": [
+        "workbench.action.navigateBack"
+      ]
+    },
+    // Go forward
+    {
+      "before": [
+        "<ctrl-i>",
+      ],
+      "commands": [
+        "workbench.action.navigateForward"
+      ]
+    },
+    // Git annotations
+    {
+      "before": [
+        "<leader>",
+        "a",
+      ],
+      "commands": [
+        "gitlens.toggleFileBlame"
+      ]
+    },
+    // Git next chagne
+    {
+      "before": [
+        "g",
+        "j",
+      ],
+      "commands": [
+        "gitlens.annotations.nextChange"
+      ]
+    },
+    // Git previous chagne
+    {
+      "before": [
+        "g",
+        "k",
+      ],
+      "commands": [
+        "gitlens.annotations.previousChange"
+      ]
+    },
+    // File history
+    {
+      "before": [
+        "g",
+        "h",
+      ],
+      "commands": [
+        "gitlens.showQuickFileHistory"
+      ]
+    },
+    // Git discard changes
+    {
+      "before": [
+        "<leader>",
+        "r",
+        "b",
+      ],
+      "commands": [
+        "git.clean"
+      ]
+    },
+    // 保存文件
+    {
+      "before": [
+        "S"
+      ],
+      "commands": [
+        "workbench.action.files.save"
+      ]
+    },
+    // 关闭当前标签页
+    {
+      "before": [
+        "q"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    },
+    // Close other tabs
+    {
+      "before": [
+        "c",
+        "o"
+      ],
+      "commands": [
+        "workbench.action.closeOtherEditors"
+      ]
+    },
+    // Close all editors in group
+    {
+      "before": [
+        "c",
+        "g"
+      ],
+      "commands": [
+        "workbench.action.closeEditorsInGroup"
+      ]
+    },
+    // Close left editors
+    {
+      "before": [
+        "c",
+        "h"
+      ],
+      "commands": [
+        "workbench.action.closeEditorsToTheLeft"
+      ]
+    },
+    // Close right editors
+    {
+      "before": [
+        "c",
+        "l"
+      ],
+      "commands": [
+        "workbench.action.closeEditorsToTheRight"
+      ]
+    },
+    // Code action
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "a"
+      ],
+      "commands": [
+        "editor.action.quickFix"
+      ]
+    },
+    // Close window
+    {
+      "before": [
+        "Q"
+      ],
+      "commands": [
+        "workbench.action.closeWindow"
+      ]
+    },
+  ],
+  "vim.commandLineModeKeyBindings": [],
+  "dotnetAcquisitionExtension.proxyUrl": "http://127.0.0.1:7890",
+  "git.autofetch": true
 }
