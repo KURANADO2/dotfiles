@@ -8,7 +8,6 @@
   "window.commandCenter": true,
   "editor.fontFamily": "JetBrains Mono",
   "markdown.preview.lineHeight": 0.9,
-  "redhat.telemetry.enabled": false,
   "workbench.colorTheme": "Default Dark Modern",
   "terminal.external.osxExec": "Kitty.app",
   "editor.lineNumbers": "relative",
@@ -23,6 +22,26 @@
   "vim.commandLineModeKeyBindingsNonRecursive": [],
   // imap
   "vim.insertModeKeyBindings": [],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<C-j>",
+      ],
+      "after": [
+        "5",
+        "j"
+      ]
+    },
+    {
+      "before": [
+        "<C-k>",
+      ],
+      "after": [
+        "5",
+        "k"
+      ]
+    },
+  ],
   // nnoremap
   "vim.normalModeKeyBindingsNonRecursive": [
     {
@@ -529,6 +548,15 @@
         "workbench.action.closeEditorsToTheLeft"
       ]
     },
+    // Comment
+    {
+      "before": [
+        "<ctrl-/>",
+      ],
+      "commands": [
+        "editor.action.commentLine"
+      ]
+    },
     // Close right editors
     {
       "before": [
@@ -556,11 +584,24 @@
         "Q"
       ],
       "commands": [
-        "workbench.action.closeWindow"
+        "workbench.action.closeFolder"
       ]
     },
   ],
   "vim.commandLineModeKeyBindings": [],
   "dotnetAcquisitionExtension.proxyUrl": "http://127.0.0.1:7890",
-  "git.autofetch": true
+  "git.autofetch": true,
+  "http.proxy": "http://127.0.0.1:7890",
+  "editor.formatOnSave": true,
+  "explorer.confirmDelete": false,
+  "editor.accessibilitySupport": "on",
+  "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.ABC",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "/opt/homebrew/bin/im-select ",
+  "vim.autoSwitchInputMethod.switchIMCmd": "/opt/homebrew/bin/im-select {im}",
+  "vim.autoSwitchInputMethod.enable": true,
+  "editor.fontSize": 12,
+  "notebook.multiCursor.enabled": true,
+  "markdown.copyFiles.destination": {
+    "**/*": "${documentDirName}/"
+  }
 }
