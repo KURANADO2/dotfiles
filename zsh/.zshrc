@@ -1,7 +1,7 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # source some files
-source ~/.zprofile 
+source ~/.zprofile
 
 # powerlevel10k
 # source ~/powerlevel10k/powerlevel10k.zsh-theme
@@ -106,6 +106,9 @@ alias gpop='git stash pop'
 
 # Lazygit
 alias lg='lazygit'
+
+# Lazydocker
+alias ld='lazydocker'
 
 # Neovim
 alias vim='nvim'
