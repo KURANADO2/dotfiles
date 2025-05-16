@@ -603,5 +603,6 @@
   "notebook.multiCursor.enabled": true,
   "markdown.copyFiles.destination": {
     "**/*": "${documentDirName}/"
-  }
+  },
+  "workbench.tree.indent": 20
 }
