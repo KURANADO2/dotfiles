@@ -14,7 +14,13 @@
     },
     {
         "key": "ctrl+/",
-        "command": "editor.action.commentLine",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "editor.action.commentLine",
+                "cursorDown"
+            ]
+        },
         "when": "editorTextFocus && !editorReadonly"
     },
     {
