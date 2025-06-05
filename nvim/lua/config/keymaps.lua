@@ -76,6 +76,10 @@ vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 vim.keymap.set("n", "\\l", ":%s/\\v$/\\r/g<CR>")
 vim.keymap.set("v", "\\l", ":s/\\v$/\\r/g<CR>")
 
+-- Clipboard
+vim.keymap.set("", "<D-c>", '"+y', opt)
+vim.keymap.set("", "<D-v>", '"+p', opt)
+
 -- Align
 vim.keymap.set("", "<LEADER>t", ":Tabular /")
 
