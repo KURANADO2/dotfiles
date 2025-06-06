@@ -76,9 +76,15 @@ vim.keymap.set("", "\\d", ":g/\\v^$/d<CR>")
 vim.keymap.set("n", "\\l", ":%s/\\v$/\\r/g<CR>")
 vim.keymap.set("v", "\\l", ":s/\\v$/\\r/g<CR>")
 
--- Clipboard
-vim.keymap.set("", "<D-c>", '"+y', opt)
-vim.keymap.set("", "<D-v>", '"+p', opt)
+-- Clipboard https://neovide.dev/faq.html#how-can-i-use-cmd-ccmd-v-to-copy-and-paste
+-- Use command + c to copy in visual model
+vim.keymap.set("v", "<D-c>", '"+y', opt)
+-- Use command + s to save in normal model
+-- vim.keymap.set("n", "<D-s>", ":w<CR>")
+-- Use command + v to paste in normal/visual/command/insert model(Do not use command + v to paste in insert mode, as if the pasted text is too long, it will cause neovim to crash)
+vim.keymap.set("n", "<D-v>", '"+P', opt)
+vim.keymap.set("v", "<D-v>", '"+P', opt)
+vim.keymap.set("c", "<D-v>", "<C-R>+", opt)
 
 -- Align
 vim.keymap.set("", "<LEADER>t", ":Tabular /")
