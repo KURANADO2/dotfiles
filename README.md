@@ -19,6 +19,7 @@ ln -sf ~/Code/GitHub/dotfiles/yazi ~/.config/yazi
 ln -sf ~/Code/GitHub/dotfiles/starship/starship.toml ~/.config/starship.toml
 ln -sf ~/Code/GitHub/dotfiles/lazygit ~/.config/lazygit
 ln -sf ~/Code/GitHub/dotfiles/lazydocker ~/Library/Application\ Support/jesseduffield/lazydocker
+ln -sf ~/Code/GitHub/dotfiles/neovide ~/.config/neovide
 ```
 
 ## Update Lazyvim
