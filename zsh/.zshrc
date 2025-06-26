@@ -137,6 +137,9 @@ alias o='ollama'
 # lazyssh
 alias s='lazyssh'
 
+# sql-param
+alias sp='sql-param'
+
 # Shadowsocks
 # Enable Terminal Proxy
 # alias pon='export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;'
