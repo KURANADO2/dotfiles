@@ -194,8 +194,10 @@ export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client@8.4'
 # Prompt
 export MYSQL_PS1="\u@\h [\d]> "
 
+export VOLTA_HOME='/Users/jing/.volta'
+
 # PATH
-export PATH=$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin
+export PATH=$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin:$VOLTA_HOME/bin
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -217,3 +219,4 @@ unset __conda_setup
 
 # pyenv
 eval "$(pyenv init - zsh)"
+export PATH="$PATH:/Users/jing/.influxdb/"
