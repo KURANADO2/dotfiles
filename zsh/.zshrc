@@ -197,7 +197,7 @@ export MYSQL_PS1="\u@\h [\d]> "
 export VOLTA_HOME='/Users/jing/.volta'
 
 # PATH
-export PATH=$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin:$VOLTA_HOME/bin
+export PATH=$VOLTA_HOME/bin:$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
