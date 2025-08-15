@@ -188,6 +188,9 @@ export GO_HOME='/usr/local/go'
 # Rust
 export RUST_HOME='/Users/jing/.cargo'
 
+# Groovy
+export GROOVY_HOME='/opt/homebrew/opt/groovy/libexec'
+
 # mysql-client
 # export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client'
 export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client@8.4'
