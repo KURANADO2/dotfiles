@@ -1,4 +1,3 @@
-
 # Kiro CLI pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 
@@ -166,6 +165,9 @@ alias pb='pbcopy'
 # musicfox
 alias m='musicfox'
 
+# copyfile
+alias cf='f(){ osascript -e "set the clipboard to (POSIX file \"$(pwd)/$1\")"; }; f'
+
 # Environment Variables
 # tldr
 export TLDR_AUTO_UPDATE_DISABLED
@@ -228,9 +230,12 @@ unset __conda_setup
 eval "$(pyenv init - zsh)"
 export PATH="$PATH:/Users/jing/.influxdb/"
 
-
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 
 # OpenClaw Completion
 source "/Users/jing/.openclaw/completions/openclaw.zsh"
+
+# taobao-native CLI
+TBN_CLI_BIN="/Users/jing/Library/Application Support/taobao/cli/bin"
+case ":$PATH:" in *":$TBN_CLI_BIN:"*) ;; *) export PATH="$PATH:$TBN_CLI_BIN" ;; esac
