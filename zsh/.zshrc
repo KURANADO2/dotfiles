@@ -168,6 +168,12 @@ alias m='musicfox'
 # copyfile
 alias cf='f(){ osascript -e "set the clipboard to (POSIX file \"$(pwd)/$1\")"; }; f'
 
+# Codex
+alias c='codex'
+
+# Claude Code
+alias cc='claude'
+
 # Environment Variables
 # tldr
 export TLDR_AUTO_UPDATE_DISABLED
@@ -209,7 +215,7 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # PATH
-export PATH=$VOLTA_HOME/bin:$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin
+export PATH=$VOLTA_HOME/bin:$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin:~/.local/bin
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
