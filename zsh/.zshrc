@@ -103,7 +103,7 @@ alias gstash='git stash'
 alias gpop='git stash pop'
 
 # ssh
-# alias ssh='kitten ssh'
+alias ssh='kitten ssh'
 
 # Lazygit
 alias lg='lazygit'
@@ -185,12 +185,14 @@ export M2_HOME='/Users/jing/Opt/apache-maven-3.9.0'
 export JDK8_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_361.jdk/Contents/Home'
 export JDK11_HOME='/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home'
 export JDK17_HOME='/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home'
+export JDK21_HOME='/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home'
 
 export JAVA_HOME=$JDK17_HOME
 
 alias jdk8='export JAVA_HOME=$JDK8_HOME'
 alias jdk11='export JAVA_HOME=$JDK11_HOME'
 alias jdk17='export JAVA_HOME=$JDK17_HOME'
+alias jdk21='export JAVA_HOME=$JDK21_HOME'
 
 # Go
 export GO_HOME='/usr/local/go'
@@ -245,3 +247,10 @@ source "/Users/jing/.openclaw/completions/openclaw.zsh"
 # taobao-native CLI
 TBN_CLI_BIN="/Users/jing/Library/Application Support/taobao/cli/bin"
 case ":$PATH:" in *":$TBN_CLI_BIN:"*) ;; *) export PATH="$PATH:$TBN_CLI_BIN" ;; esac
+
+# bun completions
+[ -s "/Users/jing/.bun/_bun" ] && source "/Users/jing/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
