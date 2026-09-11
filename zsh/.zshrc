@@ -158,6 +158,9 @@ alias pb='pbcopy'
 # musicfox
 alias m='musicfox'
 
+# Claude Code
+alias cc='claude'
+
 # Environment Variables
 # tldr
 export TLDR_AUTO_UPDATE_DISABLED
