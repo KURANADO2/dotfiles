@@ -103,7 +103,7 @@ alias gstash='git stash'
 alias gpop='git stash pop'
 
 # ssh
-alias ssh='kitten ssh'
+# alias ssh='kitten ssh'
 
 # Lazygit
 alias lg='lazygit'
@@ -187,7 +187,7 @@ export JDK11_HOME='/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home'
 export JDK17_HOME='/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home'
 export JDK21_HOME='/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home'
 
-export JAVA_HOME=$JDK17_HOME
+export JAVA_HOME=$JDK21_HOME
 
 alias jdk8='export JAVA_HOME=$JDK8_HOME'
 alias jdk11='export JAVA_HOME=$JDK11_HOME'
@@ -215,6 +215,9 @@ export VOLTA_HOME='/Users/jing/.volta'
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# claude code editor
+export EDITOR=nvim
 
 # PATH
 export PATH=$VOLTA_HOME/bin:$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin:~/.local/bin
