@@ -1,7 +1,8 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
 # source some files
-source ~/.zprofile 
+source ~/.zprofile
 
 # powerlevel10k
 # source ~/powerlevel10k/powerlevel10k.zsh-theme
@@ -84,7 +85,7 @@ alias gc='git commit'
 # alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gl="git log --color --graph"
 alias gt='git tag -a'
-alias gfetch='git fetch'
+alias gf='git fetch'
 alias gpull='git pull origin'
 alias gpush='git push origin'
 alias gshow='git show'
@@ -102,10 +103,13 @@ alias gstash='git stash'
 alias gpop='git stash pop'
 
 # ssh
-# alias ssh='kitten ssh'
+alias ssh='kitten ssh'
 
 # Lazygit
 alias lg='lazygit'
+
+# Lazydocker
+alias ld='lazydocker'
 
 # Neovim
 alias vim='nvim'
@@ -134,6 +138,9 @@ alias o='ollama'
 # lazyssh
 alias s='lazyssh'
 
+# sql-param
+alias sp='sql-param'
+
 # Shadowsocks
 # Enable Terminal Proxy
 # alias pon='export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;'
@@ -158,6 +165,12 @@ alias pb='pbcopy'
 # musicfox
 alias m='musicfox'
 
+# copyfile
+alias cf='f(){ osascript -e "set the clipboard to (POSIX file \"$(pwd)/$1\")"; }; f'
+
+# Codex
+alias c='codex'
+
 # Claude Code
 alias cc='claude'
 
@@ -172,12 +185,14 @@ export M2_HOME='/Users/jing/Opt/apache-maven-3.9.0'
 export JDK8_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_361.jdk/Contents/Home'
 export JDK11_HOME='/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home'
 export JDK17_HOME='/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home'
+export JDK21_HOME='/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home'
 
 export JAVA_HOME=$JDK17_HOME
 
 alias jdk8='export JAVA_HOME=$JDK8_HOME'
 alias jdk11='export JAVA_HOME=$JDK11_HOME'
 alias jdk17='export JAVA_HOME=$JDK17_HOME'
+alias jdk21='export JAVA_HOME=$JDK21_HOME'
 
 # Go
 export GO_HOME='/usr/local/go'
@@ -185,14 +200,24 @@ export GO_HOME='/usr/local/go'
 # Rust
 export RUST_HOME='/Users/jing/.cargo'
 
+# Groovy
+export GROOVY_HOME='/opt/homebrew/opt/groovy/libexec'
+
 # mysql-client
 # export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client'
 export MYSQL_CLIENT_HOME='/opt/homebrew/opt/mysql-client@8.4'
 # Prompt
 export MYSQL_PS1="\u@\h [\d]> "
 
+export VOLTA_HOME='/Users/jing/.volta'
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 # PATH
-export PATH=$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin
+export PATH=$VOLTA_HOME/bin:$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin:~/.local/bin
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -209,5 +234,23 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+# pyenv
+eval "$(pyenv init - zsh)"
+export PATH="$PATH:/Users/jing/.influxdb/"
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+
+# OpenClaw Completion
+source "/Users/jing/.openclaw/completions/openclaw.zsh"
+
+# taobao-native CLI
+TBN_CLI_BIN="/Users/jing/Library/Application Support/taobao/cli/bin"
+case ":$PATH:" in *":$TBN_CLI_BIN:"*) ;; *) export PATH="$PATH:$TBN_CLI_BIN" ;; esac
+
+# bun completions
+[ -s "/Users/jing/.bun/_bun" ] && source "/Users/jing/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
