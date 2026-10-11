@@ -93,8 +93,8 @@ noremap j gj
 noremap k gk
 
 " Move quickly
-noremap <C-j> 5j
-noremap <C-k> 5k
+noremap <C-j> 5gj
+noremap <C-k> 5gk
 " Go to start of the line
 noremap <C-h> ^
 " Go to end of the line

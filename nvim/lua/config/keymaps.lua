@@ -28,8 +28,8 @@ vim.keymap.set("n", "<right>", ":vertical resize+5<CR>", opt)
 
 -- 光标移动
 vim.keymap.set("", "<C-h>", "^", opt)
-vim.keymap.set("", "<C-j>", "5j", opt)
-vim.keymap.set("", "<C-k>", "5k", opt)
+vim.keymap.set("", "<C-j>", "5gj", opt)
+vim.keymap.set("", "<C-k>", "5gk", opt)
 vim.keymap.set("", "<C-l>", "$", opt)
 
 -- insert 模式下，跳到行首行尾
@@ -85,6 +85,8 @@ vim.keymap.set("v", "<D-c>", '"+y', opt)
 vim.keymap.set("n", "<D-v>", '"+P', opt)
 vim.keymap.set("v", "<D-v>", '"+P', opt)
 vim.keymap.set("c", "<D-v>", "<C-R>+", opt)
+vim.keymap.set("", "<D-<>", "<cmd>BufferLineMovePrev<CR>", opt)
+vim.keymap.set("", "<D->>", "<cmd>BufferLineMoveNext<CR>", opt)
 
 -- Align
 vim.keymap.set("", "<LEADER>t", ":Tabular /")
