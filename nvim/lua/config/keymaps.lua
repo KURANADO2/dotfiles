@@ -32,11 +32,16 @@ vim.keymap.set("", "<C-j>", "5gj", opt)
 vim.keymap.set("", "<C-k>", "5gk", opt)
 vim.keymap.set("", "<C-l>", "$", opt)
 
+-- insert 模式移动光标
+vim.keymap.set("i", "<C-h>", "<left>", opt)
+vim.keymap.set("i", "<C-j>", "<down>", opt)
+vim.keymap.set("i", "<C-k>", "<up>", opt)
+vim.keymap.set("i", "<C-l>", "<right>", opt)
 -- insert 模式下，跳到行首行尾
-vim.keymap.set("i", "<C-h>", "<ESC>I", opt)
-vim.keymap.set("i", "<C-j>", "<down><down><down><down><down>", opt)
-vim.keymap.set("i", "<C-k>", "<up><up><up><up><up>", opt)
-vim.keymap.set("i", "<C-l>", "<ESC>A", opt)
+-- vim.keymap.set("i", "<C-h>", "<ESC>I", opt)
+-- vim.keymap.set("i", "<C-j>", "<down><down><down><down><down>", opt)
+-- vim.keymap.set("i", "<C-k>", "<up><up><up><up><up>", opt)
+-- vim.keymap.set("i", "<C-l>", "<ESC>A", opt)
 
 -- 对调行模式和块模式
 vim.keymap.set("n", "<C-v>", "V", opt)

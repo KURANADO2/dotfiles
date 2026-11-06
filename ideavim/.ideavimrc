@@ -132,7 +132,6 @@ map <Down> <Action>(ResizeToolWindowDown)
 map <Left> <Action>(ResizeToolWindowLeft)
 map <Right> <Action>(ResizeToolWindowRight)
 
-
 " Debug
 map <leader>d <Action>(ChooseDebugConfiguration)
 " Stop
