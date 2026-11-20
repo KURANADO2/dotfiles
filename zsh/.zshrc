@@ -64,13 +64,13 @@ alias lha='l -ha'
 # alias cd='z'
 
 # cp
-alias cp='cp -i'
+# alias cp='cp -i'
 
 # mv
-alias mv='mv -i'
+# alias mv='mv -i'
 
 # rm
-alias rm='rm -rf'
+# alias rm='rm -rf'
 
 # Tmux
 alias tnew='tmux new -s'
@@ -154,7 +154,7 @@ alias pon='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:
 alias poff='unset https_proxy; unset http_proxy; unset all_proxy;'
 
 # gsed
-alias sed='gsed'
+# alias sed='gsed'
 
 # yazi
 alias yi='yazi'
@@ -243,9 +243,6 @@ export PATH="$PATH:/Users/jing/.influxdb/"
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
-
-# OpenClaw Completion
-source "/Users/jing/.openclaw/completions/openclaw.zsh"
 
 # taobao-native CLI
 TBN_CLI_BIN="/Users/jing/Library/Application Support/taobao/cli/bin"
