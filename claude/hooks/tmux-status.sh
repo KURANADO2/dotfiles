@@ -24,6 +24,11 @@
 state="${1:-clear}"
 pane="${TMUX_PANE:-}"
 
+# 调试开关：TMUX_STATUS_DEBUG=1 时记录每次触发（日常不产生任何 IO）
+if [ -n "$TMUX_STATUS_DEBUG" ]; then
+  echo "$(date '+%m-%d %H:%M:%S') state=$state pane=[$pane] TMUX=[${TMUX-unset}]" >> /tmp/tmux-status-debug.log
+fi
+
 # 不在 tmux 里（如 Terminal.app 直接跑 claude）：静默跳过
 [ -z "$pane" ] && exit 0
 
