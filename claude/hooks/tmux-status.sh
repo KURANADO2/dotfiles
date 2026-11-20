@@ -3,10 +3,11 @@
 # claude hooks → tmux 状态记录 + 状态栏彩球守护进程踢起
 #
 # 展示层是 tmux 状态栏的窗口彩球（见 tmux-balls-daemon.py）：
-#   working 🟢 闪烁(600ms) = claude 正在干活   （UserPromptSubmit / ElicitationResult）
-#   waiting 🔴 快闪(180ms) = 需要用户确认/回答 （PermissionRequest / Elicitation / StopFailure）
-#   done    🟡 常亮        = 本轮任务执行完成  （Stop）
-#   clear   移除状态       = 会话结束          （SessionStart / SessionEnd）
+#   working 🟢 闪烁(600ms) = claude 正在干活       （UserPromptSubmit / ElicitationResult）
+#   waiting 🔴 快闪(180ms) = 需要用户确认/回答     （PermissionRequest / Elicitation / StopFailure）
+#   done    🟡 常亮        = 任务完成或会话空闲     （Stop / SessionStart——对齐实体灯
+#                            idle=黄灯常亮的语义：只要 claude 开着就有黄球）
+#   clear   移除状态       = 会话结束、不再显示球   （SessionEnd）
 # 闪烁节奏与桌面实体 ESP32 红绿灯（traffic_light）固件一致。
 #
 # 历史注记：曾用 pane 边框颜色做状态灯，但边框色只在非活动 pane 可见，
