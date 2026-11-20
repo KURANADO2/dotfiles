@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# =============================================================================
+# clw —— 在当前目录开一个新 tmux 窗口，里面启动一个真彩色的 claude 会话
+# （claude-in-window 的缩写；「AI 自开新会话接力」的标准入口）
+#
+# 用法：
+#   clw                        # 只开窗口，交互输入
+#   clw 窗口名                  # 指定窗口名
+#   clw 窗口名 "初始提示词..."    # 开窗口并把提示词作为首条消息直接开工
+#   clw 窗口名 -c               # 续上该目录最近的会话（claude --continue）
+#
+# 典型接力场景：老会话发现问题需另起单 →
+#   让老会话执行：clw fix-xxx "交接简报：……。请修复……"
+#   新窗口弹出即开工；v2.1.178+ 的 claude 会自动把 tmux 里拉起的新会话
+#   识别为顶层会话，transcript 正常落盘、可被 --resume 找回
+#
+# 为什么套 env -u TMUX：claude 检测到 TMUX 变量会降级 256 色主题
+# （与 .zshrc 里 alias claude='env -u TMUX claude' 同一原因；但 alias 只在
+# 交互 shell 生效，脚本里必须显式去掉）
+# =============================================================================
+set -e
+
+name="${1:-claude}"
+[ $# -gt 0 ] && shift
+
+dir="$(pwd)"
+
+if [ $# -gt 0 ]; then
+  # 用 %q 安全转义每个参数，避免提示词里的引号/空格/特殊字符破坏嵌套命令
+  args=$(printf '%q ' "$@")
+  cmd="env -u TMUX claude $args"
+else
+  cmd="env -u TMUX claude"
+fi
+
+# 窗口退出后保留内容便于排查（claude 崩溃/闪退时能看到现场），按 q 或手动关
+tmux new-window -n "$name" -c "$dir" "$cmd" \; set-option -w remain-on-exit on
+echo "已开新窗口 [$name]：$dir"

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# =============================================================================
+# claude hooks → tmux pane 边框状态灯
+# 与实体 ESP32 红绿灯（traffic_light）互补：实体灯报「有状态变化」，
+# 边框灯报「是哪个 pane」——多会话并行时扫一眼边框颜色即可定位
+#
+# 用法（由 ~/.claude/settings.json 的 hooks 调用，勿手动执行）：
+#   tmux-status.sh working|waiting|done|clear
+#
+# 颜色约定（取自 oh-my-tmux/tokyo-night 已有色板，与实体红绿灯语义对齐）：
+#   working 红 #d70000 = claude 正在干活        （UserPromptSubmit / ElicitationResult）
+#   waiting 黄 #ffff00 = 等你授权/回答问题      （PermissionRequest / Elicitation / StopFailure）
+#   done    绿 #5fff00 = 本轮回答完成           （Stop）
+#   clear   灰 #303030 = 恢复非活动边框默认色   （SessionStart / SessionEnd）
+#
+# 注意：
+# - 状态只体现在「非活动 pane」的边框上（活动 pane 边框永远是活动蓝，这是
+#   tmux 的设计，正好符合「盯别的窗」的使用场景）
+# - 任何情况都 exit 0：hook 非零退出会被 claude 当作阻断/反馈信号，绝不能
+#   因为点灯失败影响 claude 正常工作
+# - .zshrc 的 alias 会去掉 TMUX 变量（真彩色修复），但 TMUX_PANE 保留，
+#   这里用 TMUX_PANE 定位、走默认 socket，不依赖 TMUX 变量
+# =============================================================================
+state="${1:-clear}"
+pane="${TMUX_PANE:-}"
+
+# 不在 tmux 里（如 Terminal.app 直接跑 claude）：静默跳过
+[ -z "$pane" ] && exit 0
+
+# 注意：必须用 set-option -p（pane 级边框样式）。
+# 不能用 select-pane -P —— tmux 3.8 里那是设置 pane 内容的前景色（window-style），
+# 会把整个窗格文字染色而不是染边框（实测踩坑）
+case "$state" in
+  working) tmux set-option -p -t "$pane" pane-border-style "fg=#d70000" >/dev/null 2>&1 ;;
+  waiting) tmux set-option -p -t "$pane" pane-border-style "fg=#ffff00" >/dev/null 2>&1 ;;
+  done)    tmux set-option -p -t "$pane" pane-border-style "fg=#5fff00" >/dev/null 2>&1 ;;
+  *)       tmux set-option -up -t "$pane" pane-border-style >/dev/null 2>&1 ;;  # clear：移除覆盖，回落全局默认灰
+esac
+exit 0

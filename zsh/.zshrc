@@ -81,6 +81,9 @@ alias ta='tmux a -t'
 # 副作用：claude 不再感知自己在 tmux 内，桌面通知需配合 preferredNotifChannel=terminal_bell
 alias claude='env -u TMUX claude'
 
+# clw：在当前目录开新 tmux 窗口启动真彩 claude（任务接力标准入口，见 dotfiles/claude/README.md）
+export PATH="$HOME/Code/GitHub/dotfiles/claude/bin:$PATH"
+
 # Git
 alias g='git'
 alias ginit='git init'
