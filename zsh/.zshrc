@@ -226,6 +226,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # claude code editor
 export EDITOR=nvim
+# ⚠️ zsh 原生行为：启动时若 $EDITOR/$VISUAL 值里含「vi」字样（nvim 命中），
+# 会自动把主键位切成 vi 模式，导致 ^N/^P 翻历史失效（变成插入字符 ^N ^P）。
+# 下行强制恢复 emacs 键位，必须保留；EDITOR 变量本身不受影响，工具照常用 nvim
+bindkey -e
 
 # PATH
 export PATH=$VOLTA_HOME/bin:$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$GO_HOME/bin:$RUST_HOME/bin:$MYSQL_CLIENT_HOME/bin:~/.local/bin
