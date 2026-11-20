@@ -33,11 +33,11 @@ style = 'bold #82AAFF'
 format = '[$time]($style) '
 disabled = false
 
-[env_var.all_proxy]
-variable = 'all_proxy'
-format = "[$env_value]($style) "
-default = ''
-style = 'bold #82AAFF'
+# [env_var.all_proxy]
+# variable = 'all_proxy'
+# format = "[$env_value]($style) "
+# default = ''
+# style = 'bold #82AAFF'
 
 [cmd_duration]
 format = '[$duration]($style) '
