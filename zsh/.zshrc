@@ -254,3 +254,22 @@ case ":$PATH:" in *":$TBN_CLI_BIN:"*) ;; *) export PATH="$PATH:$TBN_CLI_BIN" ;; 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# =============================================================================
+# kitty 内自动进入 tmux（配合 kitty.conf 的 send_text 免前缀方案）
+# 目的：保证 kitty 窗口里永远有 tmux 在接快捷键，避免字节打进裸 shell
+# 规则：
+#   - 共享会话 main：已存在则 attach（kitty 重启/崩溃后接回原现场）
+#   - 冷启动（main 不存在）：跑 workspace.sh 复刻原 kitty workspace.conf 的 9 窗口布局
+#   - cmd+n 新 OS 窗口带 TMUX_OWN_SESSION=1：独立会话 w<窗口号>，不与 main 镜像
+#   - 已在 tmux 内 / ssh 会话 / 非交互 shell / 设了 NO_AUTO_TMUX=1：跳过
+# =============================================================================
+if [[ -o interactive && -n "$KITTY_WINDOW_ID" && -z "$TMUX" && -z "$SSH_TTY" && -z "$NO_AUTO_TMUX" ]]; then
+  if [[ -n "$TMUX_OWN_SESSION" ]]; then
+    exec tmux new-session -A -s "w$KITTY_WINDOW_ID"
+  elif tmux has-session -t main 2>/dev/null; then
+    exec tmux attach -t main
+  else
+    exec "$HOME/Code/GitHub/dotfiles/tmux/workspace.sh"
+  fi
+fi

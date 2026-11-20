@@ -6,6 +6,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 git clone git@github.com:KURANADO2/dotfiles.git ~/Code/GitHub/
 
 ln -sf ~/Code/GitHub/dotfiles/kitty ~/.config/kitty
+ln -sf ~/Code/GitHub/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 ln -sf ~/Code/GitHub/dotfiles/hammerspoon ~/.hammerspoon
 ln -sf ~/Code/GitHub/dotfiles/vim/.vimrc ~/.vimrc
 ln -sf ~/Code/GitHub/dotfiles/IdeaVim/.ideavimrc ~/.ideavimrc
