@@ -76,6 +76,11 @@ alias lha='l -ha'
 alias tnew='tmux new -s'
 alias ta='tmux a -t'
 
+# claude 在 tmux 里检测到 TMUX 环境变量会降级为 256 色主题（红色徽章发白）；
+# 去掉 TMUX 变量即恢复真彩（TERM 保持 tmux-256color 不变，已实测验证）。
+# 副作用：claude 不再感知自己在 tmux 内，桌面通知需配合 preferredNotifChannel=terminal_bell
+alias claude='env -u TMUX claude'
+
 # Git
 alias g='git'
 alias ginit='git init'
