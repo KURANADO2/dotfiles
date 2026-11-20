@@ -5,7 +5,7 @@
 - 用户的终端是 kitty + tmux：kitty 快捷键经 `send_text` 注入「C-Space 前缀 + 命令键」操作 tmux，用户本人从不手按前缀键（物理 Ctrl-Space 被 macOS 输入法占用）
 - 会话结构：主会话 `main`（8 个工作窗口）；`cmd+n` 开的独立 OS 窗口是 `w<编号>` 独立会话
 - 交互式 claude 通过 alias 以 `env -u TMUX claude` 启动（TMUX 变量会让 claude 降级 256 色）；因此进程内 **没有 TMUX 变量但保留 TMUX_PANE**
-- pane 边框是状态灯（hooks 驱动）：红=干活中、黄=等用户、绿=完成、灰=空闲；与桌面实体 ESP32 红绿灯（traffic_light）语义一致
+- pane 边框是状态灯（hooks 驱动）：绿=干活中、红=需要用户确认、黄=完成、无覆盖=该 pane 没在跑 claude（默认边框）；与桌面实体 ESP32 红绿灯（traffic_light）语义一致
 
 ## 操作 tmux 的规则
 

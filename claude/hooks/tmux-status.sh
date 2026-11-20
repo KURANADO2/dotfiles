@@ -7,11 +7,12 @@
 # 用法（由 ~/.claude/settings.json 的 hooks 调用，勿手动执行）：
 #   tmux-status.sh working|waiting|done|clear
 #
-# 颜色约定（取自 oh-my-tmux/tokyo-night 已有色板，与实体红绿灯语义对齐）：
-#   working 红 #d70000 = claude 正在干活        （UserPromptSubmit / ElicitationResult）
-#   waiting 黄 #ffff00 = 等你授权/回答问题      （PermissionRequest / Elicitation / StopFailure）
-#   done    绿 #5fff00 = 本轮回答完成           （Stop）
-#   clear   灰 #303030 = 恢复非活动边框默认色   （SessionStart / SessionEnd）
+# 颜色约定（与用户桌面实体红绿灯 traffic_light 的语义完全一致）：
+#   working 绿 #5fff00 = claude 正在干活        （UserPromptSubmit / ElicitationResult）
+#   waiting 红 #d70000 = 需要用户确认/回答      （PermissionRequest / Elicitation / StopFailure）
+#   done    黄 #ffff00 = 本轮任务执行完成       （Stop）
+#   clear   移除覆盖  = 该 pane 没在跑 claude，回落 tmux 默认边框（活动蓝/非活动灰）
+#                                                        （SessionStart / SessionEnd）
 #
 # 注意：
 # - 状态只体现在「非活动 pane」的边框上（活动 pane 边框永远是活动蓝，这是
@@ -36,9 +37,9 @@ fi
 # 不能用 select-pane -P —— tmux 3.8 里那是设置 pane 内容的前景色（window-style），
 # 会把整个窗格文字染色而不是染边框（实测踩坑）
 case "$state" in
-  working) tmux set-option -p -t "$pane" pane-border-style "fg=#d70000" >/dev/null 2>&1 ;;
-  waiting) tmux set-option -p -t "$pane" pane-border-style "fg=#ffff00" >/dev/null 2>&1 ;;
-  done)    tmux set-option -p -t "$pane" pane-border-style "fg=#5fff00" >/dev/null 2>&1 ;;
-  *)       tmux set-option -up -t "$pane" pane-border-style >/dev/null 2>&1 ;;  # clear：移除覆盖，回落全局默认灰
+  working) tmux set-option -p -t "$pane" pane-border-style "fg=#5fff00" >/dev/null 2>&1 ;;
+  waiting) tmux set-option -p -t "$pane" pane-border-style "fg=#d70000" >/dev/null 2>&1 ;;
+  done)    tmux set-option -p -t "$pane" pane-border-style "fg=#ffff00" >/dev/null 2>&1 ;;
+  *)       tmux set-option -up -t "$pane" pane-border-style >/dev/null 2>&1 ;;  # clear：移除覆盖，回落默认（活动蓝/非活动灰）
 esac
 exit 0

@@ -4,7 +4,7 @@
 
 | 文件 | 作用 | 生效方式 |
 |---|---|---|
-| `hooks/tmux-status.sh` | pane 边框状态灯（红=干活/黄=等你/绿=完成），claude hooks 调用 | `~/.claude/settings.json` 的 hooks 段（已配置） |
+| `hooks/tmux-status.sh` | pane 边框状态灯（绿=干活/红=需确认/黄=完成，与实体红绿灯同语义），claude hooks 调用 | `~/.claude/settings.json` 的 hooks 段（已配置） |
 | `bin/clw` | 在当前目录开新 tmux 窗口启动真彩色 claude，可带交接简报直接开工（任务接力标准入口） | 已加入 PATH（见 `zsh/.zshrc`） |
 | `CLAUDE.tmux.md` | 给所有 claude 会话的 tmux 编排约定（显式 -t、接力用 clw、禁 send-keys 注入等） | 需在 `~/.claude/CLAUDE.md` 里 import（待确认） |
 
