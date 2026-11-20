@@ -1,26 +1,21 @@
 #!/usr/bin/env bash
 # =============================================================================
-# claude hooks → tmux pane 边框状态灯
-# 与实体 ESP32 红绿灯（traffic_light）互补：实体灯报「有状态变化」，
-# 边框灯报「是哪个 pane」——多会话并行时扫一眼边框颜色即可定位
+# claude hooks → tmux 状态记录 + 状态栏彩球守护进程踢起
+#
+# 展示层是 tmux 状态栏的窗口彩球（见 tmux-balls-daemon.py）：
+#   working 🟢 闪烁(600ms) = claude 正在干活   （UserPromptSubmit / ElicitationResult）
+#   waiting 🔴 快闪(180ms) = 需要用户确认/回答 （PermissionRequest / Elicitation / StopFailure）
+#   done    🟡 常亮        = 本轮任务执行完成  （Stop）
+#   clear   移除状态       = 会话结束          （SessionStart / SessionEnd）
+# 闪烁节奏与桌面实体 ESP32 红绿灯（traffic_light）固件一致。
+#
+# 历史注记：曾用 pane 边框颜色做状态灯，但边框色只在非活动 pane 可见，
+# 点击 pane 后被活动蓝覆盖，存在设计冲突，2026-11-20 改为状态栏彩球方案
 #
 # 用法（由 ~/.claude/settings.json 的 hooks 调用，勿手动执行）：
 #   tmux-status.sh working|waiting|done|clear
 #
-# 颜色约定（与用户桌面实体红绿灯 traffic_light 的语义完全一致）：
-#   working 绿 #5fff00 = claude 正在干活        （UserPromptSubmit / ElicitationResult）
-#   waiting 红 #d70000 = 需要用户确认/回答      （PermissionRequest / Elicitation / StopFailure）
-#   done    黄 #ffff00 = 本轮任务执行完成       （Stop）
-#   clear   移除覆盖  = 该 pane 没在跑 claude，回落 tmux 默认边框（活动蓝/非活动灰）
-#                                                        （SessionStart / SessionEnd）
-#
-# 注意：
-# - 状态只体现在「非活动 pane」的边框上（活动 pane 边框永远是活动蓝，这是
-#   tmux 的设计，正好符合「盯别的窗」的使用场景）
-# - 任何情况都 exit 0：hook 非零退出会被 claude 当作阻断/反馈信号，绝不能
-#   因为点灯失败影响 claude 正常工作
-# - .zshrc 的 alias 会去掉 TMUX 变量（真彩色修复），但 TMUX_PANE 保留，
-#   这里用 TMUX_PANE 定位、走默认 socket，不依赖 TMUX 变量
+# 注意：任何情况都 exit 0——hook 非零退出会被 claude 当作阻断/反馈信号
 # =============================================================================
 state="${1:-clear}"
 pane="${TMUX_PANE:-}"
@@ -33,13 +28,23 @@ fi
 # 不在 tmux 里（如 Terminal.app 直接跑 claude）：静默跳过
 [ -z "$pane" ] && exit 0
 
-# 注意：必须用 set-option -p（pane 级边框样式）。
-# 不能用 select-pane -P —— tmux 3.8 里那是设置 pane 内容的前景色（window-style），
-# 会把整个窗格文字染色而不是染边框（实测踩坑）
+# 记录 pane 级状态（守护进程轮询此选项聚合彩球）
 case "$state" in
-  working) tmux set-option -p -t "$pane" pane-border-style "fg=#5fff00" >/dev/null 2>&1 ;;
-  waiting) tmux set-option -p -t "$pane" pane-border-style "fg=#d70000" >/dev/null 2>&1 ;;
-  done)    tmux set-option -p -t "$pane" pane-border-style "fg=#ffff00" >/dev/null 2>&1 ;;
-  *)       tmux set-option -up -t "$pane" pane-border-style >/dev/null 2>&1 ;;  # clear：移除覆盖，回落默认（活动蓝/非活动灰）
+  working|waiting|done)
+    tmux set-option -p -t "$pane" @claude_state "$state" >/dev/null 2>&1
+    ;;
+  *)
+    tmux set-option -up -t "$pane" @claude_state >/dev/null 2>&1
+    ;;
 esac
+
+# 清理历史版本可能留下的边框覆盖（自愈，幂等）
+tmux set-option -up -t "$pane" pane-border-style >/dev/null 2>&1
+
+# 踢起状态栏守护进程（文件锁保证单实例，已在跑则立刻退出；
+# 即使本次是 clear 也踢一脚，让它有机会清理残球并自行退出）
+DIR="$(cd "$(dirname "$0")" && pwd)"
+if command -v python3 >/dev/null 2>&1; then
+  nohup python3 "$DIR/tmux-balls-daemon.py" >/dev/null 2>&1 &
+fi
 exit 0
