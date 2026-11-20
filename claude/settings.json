@@ -1,0 +1,266 @@
+{
+  "editorMode": "normal",
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "dbhub@dbhub": true,
+    "jdtls-lsp@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "dbhub": {
+      "source": {
+        "repo": "bytebase/dbhub",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "Elicitation": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh waiting",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "ElicitationResult": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh working",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          },
+          {
+            "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'",
+            "type": "command"
+          }
+        ],
+        "matcher": "permission_prompt|elicitation_dialog"
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh waiting",
+            "timeout": 5
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh clear",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh done",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh done",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh waiting",
+            "timeout": 5
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh working",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "mcp__codegraph__codegraph_explore",
+      "mcp__codegraph__codegraph_search",
+      "mcp__codegraph__codegraph_node",
+      "mcp__codegraph__codegraph_callers",
+      "mcp__codegraph__codegraph_callees",
+      "mcp__codegraph__codegraph_impact",
+      "mcp__codegraph__codegraph_files",
+      "mcp__codegraph__codegraph_status",
+      "Bash(tmux *)"
+    ],
+    "defaultMode": "auto"
+  },
+  "skillOverrides": {
+    "quarkclouddrive": "off"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "statusLine": {
+    "command": "bash $HOME/Code/GitHub/dotfiles/claude/statusline-command.sh",
+    "type": "command"
+  },
+  "theme": "auto",
+  "worktree": {
+    "baseRef": "head"
+  },
+  "preferredNotifChannel": "terminal_bell"
+}

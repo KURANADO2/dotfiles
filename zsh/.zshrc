@@ -76,6 +76,11 @@ alias lha='l -ha'
 alias tnew='tmux new -s'
 alias ta='tmux a -t'
 
+# claude 凭证与模型环境变量（ANTHROPIC_AUTH_TOKEN 等）。
+# ⚠️ 文件本体在仓库外（~/.claude_env，chmod 600），仓库是公开的，token 绝不进库；
+# 文件格式见 dotfiles README「~/.claude_env」一节
+[ -f ~/.claude_env ] && source ~/.claude_env
+
 # claude 在 tmux 里检测到 TMUX 环境变量会降级为 256 色主题（红色徽章发白）；
 # 去掉 TMUX 变量即恢复真彩（TERM 保持 tmux-256color 不变，已实测验证）。
 # 副作用：claude 不再感知自己在 tmux 内，桌面通知需配合 preferredNotifChannel=terminal_bell
