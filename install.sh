@@ -97,13 +97,11 @@ if [ "$OS" = "Darwin" ]; then
   echo "ℹ️  macOS 全套完成。kitty 内新窗口会自动进入 tmux（见 zsh/.zshrc 末尾）。"
 else
   echo "ℹ️  远程最小集完成（未链接 Mac 专属的 zshrc/kitty/cursor 等）。"
-  echo "ℹ️  请把下面几行加进远程的 ~/.zshrc 或 ~/.bashrc："
-  echo '    # ssh 登录自动进 tmux（从本地 tmux 里 ssh 过来时跳过，避免嵌套；断线重连 attach 即恢复现场）'
-  echo '    [[ $- == *i* && -n "$SSH_TTY" && -z "$TMUX" && "$TERM" != tmux-* && "$TERM" != screen* ]] && exec tmux new -A -s main'
-  echo '    # claude 环境（如在远程跑 claude）'
+  echo "ℹ️  请把下面几行加进远程的 ~/.zshrc 或 ~/.bashrc（ssh 登录为裸 shell，与本机一致，手动 tnew 进 tmux）："
+  echo '    # claude 环境与 tmux 工具'
   echo '    [ -f ~/.claude_env ] && source ~/.claude_env'
   echo "    alias claude='env -u TMUX claude'"
-  echo '    tnew() { "$HOME/.dotfiles/tmux/workspace/new.sh" "${1:-main}"; }'
+  echo '    unalias tnew 2>/dev/null; tnew() { "$HOME/.dotfiles/tmux/workspace/new.sh" "${1:-main}"; }'
   echo '    export PATH="$HOME/.dotfiles/claude/bin:$PATH"'
   echo "ℹ️  远程机器的工作区定义请放 ~/.dotfiles/tmux/workspace/local/main.conf"
   echo "    （local/ 不进仓库，各机器写自己的目录；没有它 tnew main 建普通空会话）"

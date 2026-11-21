@@ -3,7 +3,8 @@
 ## 环境事实
 
 - 用户的终端是 kitty + tmux：kitty 快捷键经 `send_text` 注入「C-Space 前缀 + 命令键」操作 tmux，用户本人从不手按前缀键（物理 Ctrl-Space 被 macOS 输入法占用）
-- 会话结构：`tnew <名字>` 创建或打开会话（main 按 `tmux/workspace/[local/]main.conf` 建工作区，local/ 为各机器私有配置不进仓库）；`cmd+n` 新 OS 窗口是裸 zsh（不自动进 tmux，专供 ssh 远程等场景，避免本地/远程 tmux 嵌套）
+- 会话结构：`tnew <名字>` 创建或打开会话（main 按 `tmux/workspace/[local/]main.conf` 建工作区，local/ 为各机器私有配置不进仓库）；`cmd+n` 新 OS 窗口是裸 zsh（不自动进 tmux，专供 ssh 远程等场景）；远程服务器 ssh 登录同样是裸 zsh，手动 tnew，两边行为一致
+- `cmd+d` = detach（原生 prefix d）：会话转后台持久运行，窗口回到裸 zsh 提示符（tnew 的 attach 不用 exec），再次 `tnew <名字>` 接回
 - 交互式 claude 通过 alias 以 `env -u TMUX claude` 启动（TMUX 变量会让 claude 降级 256 色）；因此进程内 **没有 TMUX 变量但保留 TMUX_PANE**
 - claude 状态显示在 tmux 状态栏（hooks + 守护进程驱动）：窗口条目里每个跑 claude 的 pane 一颗彩球——🟢 闪烁=干活中、🔴 快闪=需要用户确认、🟡 常亮=完成或空闲（会话一打开就是黄球，与实体灯 idle 语义一致），闪烁节奏与桌面实体 ESP32 红绿灯（traffic_light 固件 600/180ms）一致；没跑 claude 的 pane/窗口不显示球。早期方案的 pane 边框染色已废弃（会被活动 pane 的蓝色边框覆盖）
 

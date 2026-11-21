@@ -42,20 +42,23 @@ chmod 600 ~/.claude_env
 
 ## tmux 工作区（tnew / workspace conf）
 
-- 不自动进 tmux：kitty 启动、`cmd+n` 新 OS 窗口都是裸 zsh；干活前手动 `tnew <名字>`
+- 不自动进 tmux：kitty 启动、`cmd+n` 新 OS 窗口、远程 ssh 登录都是裸 zsh；干活前手动 `tnew <名字>`（两边行为一致）
 - `tnew <名字>`：会话已存在 → attach；不存在 → 按 conf 建好工作区再 attach；无 conf → 普通空会话
+- `cmd+d` = detach 当前会话（原生 prefix d）：会话转后台持久运行，窗口回到裸 zsh 提示符
+  （attach 不用 exec，窗口不关闭），再次 `tnew <名字>` 接回
 - conf 查找顺序：`tmux/workspace/local/<名字>.conf`（**机器私有，不进仓库**，各机器目录不同）
   → `tmux/workspace/<名字>.conf`（仓库通用版，如本机的 `main.conf` 8 窗口布局）
 - conf 格式 = tmux 原生命令逐行书写（new-window / split-window / select-layout…）
-- `cmd+n` 裸窗口的典型用途：ssh 远程再进远程 tmux——避免本地/远程 tmux 嵌套
-  （两层前缀键相同，外层会截获按键）
+- `cmd+n` 裸窗口的典型用途：ssh 远程再在远程 `tnew`——本地不在 tmux 里，远程 tmux 就不会嵌套
+  （两层 tmux 前缀键相同，外层会截获按键）
 - 已知取舍：裸 zsh 窗口里按 Cmd 系快捷键会把 tmux 前缀字节打进 shell（零星垃圾字符，无实害）
 
 ## 远程服务器（ssh 复用本机 kitty + tmux 全套操作）
 
 原理：本机 kitty 的快捷键是往终端数据流里写「tmux 前缀字节 + 命令键」（见
 `kitty/kitty.conf` 的 send_text 映射），ssh 会原样透传这些字节——因此登录远程后，
-**本机全部 Cmd 快捷键直接驱动远程 tmux**；且远程会话不怕断网，重连 attach 即恢复现场。
+**本机全部 Cmd 快捷键直接驱动远程 tmux**；且远程会话不怕断网，重连后 `tnew main`
+即恢复现场（远程 ssh 登录为裸 shell，与本机一致手动 tnew，不自动进 tmux）。
 
 ```bash
 # 1. 远程 clone（GitHub 走 ssh 协议；境内服务器 HTTPS 常不通，ssh/443 均可）
@@ -73,10 +76,9 @@ cd ~/github/dotfiles && ./install.sh        # Linux 自动走最小集，并建 
 #    chmod 600 ~/.claude_env
 
 # 3. 远程 ~/.zshrc 追加（install.sh 结束时也会打印这段）：
-#    [[ $- == *i* && -n "$SSH_TTY" && -z "$TMUX" && "$TERM" != tmux-* && "$TERM" != screen* ]] && exec tmux new -A -s main
 #    [ -f ~/.claude_env ] && source ~/.claude_env
 #    alias claude='env -u TMUX claude'
-#    tnew() { "$HOME/.dotfiles/tmux/workspace/new.sh" "${1:-main}"; }
+#    unalias tnew 2>/dev/null; tnew() { "$HOME/.dotfiles/tmux/workspace/new.sh" "${1:-main}"; }
 #    export PATH="$HOME/.dotfiles/claude/bin:$PATH"
 
 # 4. 远程自己的工作区：~/.dotfiles/tmux/workspace/local/main.conf（不进仓库）
@@ -91,7 +93,7 @@ jq（claude statusline，可选）。settings.json 里的 traffic_light/osascrip
 - kitty 只管 OS 窗口与渲染；tab/分屏/布局/会话持久全部由 tmux 承担
 - kitty 快捷键经 `send_text` 注入「C-Space 前缀 + 命令键」，无需手按前缀
   （物理 Ctrl-Space 留给 macOS 切输入法，两条通路互不干扰）
-- `tnew <名字>` 手动进入 tmux；`cmd+n` 裸窗口留给 ssh 等场景
+- `tnew <名字>` 手动进入 tmux，`cmd+d` 脱离（会话转后台）；`cmd+n` 裸窗口留给 ssh 等场景
 - claude 状态经 hooks 显示为状态栏彩球：🟢 干活中(600ms 闪) / 🔴 等确认(180ms 快闪) /
   🟡 完成或空闲(常亮)，节奏与桌面实体 ESP32 红绿灯（traffic_light）一致；
   F1 广播模式在右下角显示「📢 广播中」常驻指示
