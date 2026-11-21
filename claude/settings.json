@@ -21,7 +21,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -31,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh waiting",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh waiting",
             "timeout": 5
           }
         ]
@@ -41,7 +41,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -51,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh working",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh working",
             "timeout": 5
           }
         ]
@@ -61,12 +61,12 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           },
           {
-            "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'",
+            "command": "command -v osascript >/dev/null 2>&1 && osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'; exit 0",
             "type": "command"
           }
         ],
@@ -77,7 +77,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -88,7 +88,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh waiting",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh waiting",
             "timeout": 5
           }
         ],
@@ -99,7 +99,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -111,7 +111,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -123,7 +123,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -135,7 +135,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -145,7 +145,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh clear",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh clear",
             "timeout": 5
           }
         ]
@@ -155,7 +155,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -165,7 +165,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh done",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh done",
             "timeout": 5
           }
         ]
@@ -175,7 +175,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -185,7 +185,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh done",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh done",
             "timeout": 5
           }
         ]
@@ -195,7 +195,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -206,7 +206,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh waiting",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh waiting",
             "timeout": 5
           }
         ],
@@ -217,7 +217,7 @@
       {
         "hooks": [
           {
-            "command": "python3 $HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py hook",
+            "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
             "timeout": 5,
             "type": "command"
           }
@@ -227,7 +227,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/Code/GitHub/dotfiles/claude/hooks/tmux-status.sh working",
+            "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh working",
             "timeout": 5
           }
         ]
@@ -255,7 +255,7 @@
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "statusLine": {
-    "command": "bash $HOME/Code/GitHub/dotfiles/claude/statusline-command.sh",
+    "command": "bash $HOME/.dotfiles/claude/statusline-command.sh",
     "type": "command"
   },
   "theme": "auto",

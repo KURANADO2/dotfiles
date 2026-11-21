@@ -73,7 +73,9 @@ alias lha='l -ha'
 # alias rm='rm -rf'
 
 # Tmux
-alias tnew='tmux new -s'
+# tnew <名字>：会话已存在 → attach；不存在 → 按 tmux/workspace/[local/]<名字>.conf
+# 建好工作区再 attach（无对应 conf 则建普通空会话）。实现见 tmux/workspace/new.sh
+tnew() { "$HOME/.dotfiles/tmux/workspace/new.sh" "${1:-main}"; }
 alias ta='tmux a -t'
 
 # claude 凭证与模型环境变量（ANTHROPIC_AUTH_TOKEN 等）。
@@ -87,7 +89,7 @@ alias ta='tmux a -t'
 alias claude='env -u TMUX claude'
 
 # clw：在当前目录开新 tmux 窗口启动真彩 claude（任务接力标准入口，见 dotfiles/claude/README.md）
-export PATH="$HOME/Code/GitHub/dotfiles/claude/bin:$PATH"
+export PATH="$HOME/.dotfiles/claude/bin:$PATH"
 
 # Git
 alias g='git'
@@ -271,22 +273,3 @@ case ":$PATH:" in *":$TBN_CLI_BIN:"*) ;; *) export PATH="$PATH:$TBN_CLI_BIN" ;; 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# =============================================================================
-# kitty 内自动进入 tmux（配合 kitty.conf 的 send_text 免前缀方案）
-# 目的：保证 kitty 窗口里永远有 tmux 在接快捷键，避免字节打进裸 shell
-# 规则：
-#   - 共享会话 main：已存在则 attach（kitty 重启/崩溃后接回原现场）
-#   - 冷启动（main 不存在）：跑 workspace.sh 复刻原 kitty workspace.conf 的 9 窗口布局
-#   - cmd+n 新 OS 窗口带 TMUX_OWN_SESSION=1：独立会话 w<窗口号>，不与 main 镜像
-#   - 已在 tmux 内 / ssh 会话 / 非交互 shell / 设了 NO_AUTO_TMUX=1：跳过
-# =============================================================================
-if [[ -o interactive && -n "$KITTY_WINDOW_ID" && -z "$TMUX" && -z "$SSH_TTY" && -z "$NO_AUTO_TMUX" ]]; then
-  if [[ -n "$TMUX_OWN_SESSION" ]]; then
-    exec tmux new-session -A -s "w$KITTY_WINDOW_ID"
-  elif tmux has-session -t main 2>/dev/null; then
-    exec tmux attach -t main
-  else
-    exec "$HOME/Code/GitHub/dotfiles/tmux/workspace.sh"
-  fi
-fi

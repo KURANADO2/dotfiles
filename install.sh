@@ -49,6 +49,12 @@ link() { # link <仓库内源> <目标链接路径>
 
 echo "== dotfiles 安装（${OS}，仓库：${REPO}）=="
 
+# ---- 统一入口软链 ----
+# ~/.dotfiles 指向仓库在本机的实际位置（仓库可 clone 到任意路径，如本机
+# ~/Code/GitHub/dotfiles、远程 ~/github/dotfiles）；settings.json、CLAUDE.md
+# 的 import、zshrc 的 tnew/clw 全部经 $HOME/.dotfiles 引用仓库，跨机器通用
+link "$REPO"                        "$HOME/.dotfiles"
+
 # ---- 通用集（macOS 与 Linux 远程都链接） ----
 link "$REPO/tmux/.tmux.conf"        "$HOME/.tmux.conf"
 link "$REPO/vim/.vimrc"             "$HOME/.vimrc"
@@ -91,12 +97,15 @@ if [ "$OS" = "Darwin" ]; then
   echo "ℹ️  macOS 全套完成。kitty 内新窗口会自动进入 tmux（见 zsh/.zshrc 末尾）。"
 else
   echo "ℹ️  远程最小集完成（未链接 Mac 专属的 zshrc/kitty/cursor 等）。"
-  echo "ℹ️  如需 ssh 登录自动进入 tmux，把下面这行加进远程的 ~/.zshrc 或 ~/.bashrc："
-  echo '    [[ $- == *i* && -n "$SSH_TTY" && -z "$TMUX" ]] && exec tmux new -A -s main'
-  echo "ℹ️  如在远程跑 claude，还需在 rc 里加："
+  echo "ℹ️  请把下面几行加进远程的 ~/.zshrc 或 ~/.bashrc："
+  echo '    # ssh 登录自动进 tmux（从本地 tmux 里 ssh 过来时跳过，避免嵌套；断线重连 attach 即恢复现场）'
+  echo '    [[ $- == *i* && -n "$SSH_TTY" && -z "$TMUX" && "$TERM" != tmux-* && "$TERM" != screen* ]] && exec tmux new -A -s main'
+  echo '    # claude 环境（如在远程跑 claude）'
   echo '    [ -f ~/.claude_env ] && source ~/.claude_env'
   echo "    alias claude='env -u TMUX claude'"
-  echo "    export PATH=\"$REPO/claude/bin:\$PATH\""
-  echo "ℹ️  settings.json 里的 traffic_light hooks 引用 ~/Code/GitHub/traffic_light，"
-  echo "    远程没有该仓库时这些 hook 会静默失败，不影响使用。"
+  echo '    tnew() { "$HOME/.dotfiles/tmux/workspace/new.sh" "${1:-main}"; }'
+  echo '    export PATH="$HOME/.dotfiles/claude/bin:$PATH"'
+  echo "ℹ️  远程机器的工作区定义请放 ~/.dotfiles/tmux/workspace/local/main.conf"
+  echo "    （local/ 不进仓库，各机器写自己的目录；没有它 tnew main 建普通空会话）"
+  echo "ℹ️  settings.json 里的 traffic_light hooks 已带存在性守卫，远程没有该仓库时静默跳过。"
 fi

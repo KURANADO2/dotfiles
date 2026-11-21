@@ -79,4 +79,4 @@
 
 ## tmux 编排约定（正文维护在 dotfiles 仓库）
 
-@~/Code/GitHub/dotfiles/claude/CLAUDE.tmux.md
+@~/.dotfiles/claude/CLAUDE.tmux.md
