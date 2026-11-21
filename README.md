@@ -30,6 +30,10 @@ EOF
 chmod 600 ~/.claude_env
 ```
 
+**更新 token 或切换模型**：直接编辑 `~/.claude_env` 里对应的 export 行即可
+（模型映射还有 `ANTHROPIC_DEFAULT_OPUS/SONNET/HAIKU/FABLE_MODEL` 等可选变量）。
+改完后**新开的终端/新启动的 claude 会话**生效；正在运行的 claude 会话沿用旧值，需重启。
+
 ## 远程服务器（ssh 复用本机 kitty + tmux 全套操作）
 
 原理：本机 kitty 的快捷键是往终端数据流里写「tmux 前缀字节 + 命令键」（见

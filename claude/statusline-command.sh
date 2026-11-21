@@ -1,7 +1,7 @@
 #!/bin/bash
 # Claude Code status line — mirrors the Starship prompt (~/.config/starship.toml).
-# Module order: [os] [directory] [git_branch] [git_status] [languages] [model] [ctx] | [time] [all_proxy]
-# (left prompt first, then Claude extras, then the starship right_format items)
+# Module order: [os] [directory] [git_branch] [git_status] [languages] [model] [ctx]
+# (left prompt first, then Claude extras; time/proxy removed per user request)
 # The trailing '➜' (character module) is intentionally omitted.
 
 set -u
@@ -31,8 +31,6 @@ C_NODE=$'\e[1;32m'         # starship [nodejs] default: bold green
 C_GO=$'\e[1;36m'           # starship [golang] default: bold cyan
 C_MODEL=$'\e[35m'          # Claude model
 C_CTX=$'\e[33m'            # context usage
-C_TIME=$'\e[1;33m'         # [time] default: bold yellow
-C_PROXY=$'\e[1;38;5;111m'  # [env_var.all_proxy] style = 'bold #82AAFF'
 
 parts=()
 
@@ -125,10 +123,7 @@ fi
 [ -n "$model" ] && parts+=("${C_MODEL}${model}${R}")
 [ -n "$context_pct" ] && parts+=("${C_CTX}ctx:${context_pct}%${R}")
 
-# starship right_format: $time $cmd_duration $env_var(all_proxy)
-# (cmd_duration has no status line analogue, skipped)
-parts+=("${C_TIME}$(date +%H:%M:%S)${R}")
-[ -n "${all_proxy:-}" ] && parts+=("${C_PROXY}${all_proxy}${R}")
+# 时间与代理展示已按要求移除（starship 侧也已关闭，两边保持一致）
 
 # Join parts with single spaces
 line=""

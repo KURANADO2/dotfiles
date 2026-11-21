@@ -58,6 +58,7 @@ link "$REPO/lazygit"                "$XDG/lazygit"
 link "$REPO/yazi"                   "$XDG/yazi"
 link "$REPO/p10k/.p10k.zsh"         "$HOME/.p10k.zsh"
 link "$REPO/claude/settings.json"   "$HOME/.claude/settings.json"
+link "$REPO/claude/CLAUDE.md"       "$HOME/.claude/CLAUDE.md"
 
 # ---- macOS 专属 ----
 if [ "$OS" = "Darwin" ]; then
