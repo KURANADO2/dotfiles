@@ -32,10 +32,18 @@ C_GO=$'\e[1;36m'           # starship [golang] default: bold cyan
 C_MODEL=$'\e[35m'          # Claude model
 C_CTX=$'\e[33m'            # context usage
 
+# --- Prompt glyphs, emitted via printf byte escapes (pure ASCII on disk) ---
+# Why not literal glyphs: the original os/branch characters were silently
+# dropped to plain spaces by the editing pipeline that first wrote this script,
+# so the status line rendered invisible placeholders. Keep these as escapes;
+# do NOT "simplify" them back into literal characters.
+SYM_OS=$(printf '\xf0\x9f\x8d\x8e')      # U+1F34E red apple — starship 1.22 [os] macOS default symbol
+SYM_BRANCH=$(printf '\xee\x82\xa0')      # U+E0A0 (Nerd Font) — starship [git_branch] default symbol
+
 parts=()
 
-# [os] module — enabled in starship.toml; macOS symbol
-parts+=("${C_OS} ${R}")
+# [os] module — enabled in starship.toml; macOS symbol (SYM_OS above)
+parts+=("${C_OS}${SYM_OS}${R}")
 
 # [directory] — truncation_length = 0 / truncate_to_repo = false → full path, $HOME → ~
 home_sym='~'
@@ -87,7 +95,7 @@ if [ -n "$gitout" ]; then
   elif [[ $header == *"[behind "* ]]; then ab="⇣"
   fi
 
-  git_part="${C_BRANCH} ${branch}${R}"
+  git_part="${C_BRANCH}${SYM_BRANCH} ${branch}${R}"
   [ -n "${st}${ab}" ] && git_part+=" ${C_GITST}[${st}${ab}]${R}"
   [ -n "$worktree" ] && git_part+=" ${C_GITST}(${worktree})${R}"
   parts+=("$git_part")
