@@ -26,6 +26,10 @@
      status-right 引用后显示在状态栏右下角。守护进程随「无 claude 状态
      5 秒」退出，退出期间计数不更新——但增删条目都发生在 claude 会话里，
      会话 hook 会重新踢起本进程，滞后窗口极短
+  8. pane 标题栏：窗口 pane 数 >1 时自动开 pane-border-status top（回到
+     单 pane 自动关掉）；标题栏格式（.tmux.conf 的 pane-border-format）
+     引用 @clw_ball——本 pane 自己的彩球，与状态栏同相位闪烁——以及
+     clw 写入的 @clw_depth 代数标记（↳N）
 
 调试：TMUX_BALLS_DEBUG=1 时写日志 /tmp/tmux-balls-daemon-<socket>.log
 """
@@ -96,26 +100,34 @@ def tmux(*args: str) -> subprocess.CompletedProcess:
     return subprocess.run(["tmux", *args], capture_output=True, text=True)
 
 
-def poll_states() -> tuple[dict[str, list[str]], list[dict]] | None:
-    """返回 ({window_id: [按 pane 顺序的状态, ...]}, [pane 详情, ...])。
-    窗口字典只含跑着 claude 的 pane；pane 详情含纠偏所需的
-    pane_id / state / session_id / ts。server 不可达时返回 None。"""
+def poll_states() -> tuple[dict[str, list[str]], dict[str, int], dict[str, str], list[dict]] | None:
+    """返回 (窗口彩球状态, 窗口 pane 总数, pane 级状态, 纠偏用 pane 详情)。
+    窗口字典只含跑着 claude 的 pane；pane 级状态供标题栏小球渲染；
+    pane 详情含纠偏所需的 pane_id / state / session_id / ts。
+    server 不可达时返回 None。"""
     result = tmux("list-panes", "-a", "-F",
                   "#{window_id}\t#{pane_index}\t#{@claude_state}"
                   "\t#{pane_id}\t#{@claude_session_id}\t#{@claude_state_ts}")
     if result.returncode != 0:
         return None
     windows: dict[str, list[tuple[int, str]]] = {}
+    win_counts: dict[str, int] = {}
+    pane_states: dict[str, str] = {}
     panes: list[dict] = []
     for line in result.stdout.splitlines():
         parts = (line.split("\t") + [""] * 6)[:6]
         win, idx, state, pane_id, sid, ts = parts[0], parts[1], parts[2].strip(), parts[3], parts[4].strip(), parts[5].strip()
+        if win:
+            win_counts[win] = win_counts.get(win, 0) + 1
         if state in BALLS:
             windows.setdefault(win, []).append((int(idx), state))
+            if pane_id:
+                pane_states[pane_id] = state
         if pane_id and (state in BALLS or sid):
             panes.append({"pane_id": pane_id, "state": state,
                           "sid": sid, "ts": ts})
-    return {w: [s for _, s in sorted(v)] for w, v in windows.items()}, panes
+    return ({w: [s for _, s in sorted(v)] for w, v in windows.items()},
+            win_counts, pane_states, panes)
 
 
 def fetch_agents() -> dict[str, str] | None:
@@ -234,8 +246,12 @@ def main() -> int:
     log(f"daemon 启动 sock={SOCK_ID} pid={os.getpid()}")
 
     cache: dict[str, str] = {}   # window_id → 上次写入的彩球串
+    pane_ball_cache: dict[str, str] = {}   # pane_id → 上次写入的标题栏小球
+    border_cache: dict[str, bool] = {}     # window_id → 标题栏当前是否开启
     followups_cache: str | None = None   # 上次写入的 @followups_count 值
     states: dict[str, list[str]] = {}
+    win_counts: dict[str, int] = {}
+    pane_states: dict[str, str] = {}
     panes: list[dict] = []
     last_state_seen = time.monotonic()
     poll_failures = 0
@@ -251,7 +267,7 @@ def main() -> int:
                     return 0
             else:
                 poll_failures = 0
-                states, panes = polled
+                states, win_counts, pane_states, panes = polled
         # 轮询纠偏：3 秒一次，失败静默跳过（hook 链路仍是主通道）
         if panes and tick % AGENTS_POLL_EVERY == 0:
             agents = fetch_agents()
@@ -291,6 +307,32 @@ def main() -> int:
                 tmux("set-option", "-uw", "-t", win, "@claude_balls")
                 cache[win] = ""
                 changed = True
+        # pane 标题栏小球：与状态栏彩球同相位闪烁（写 @clw_ball 供
+        # pane-border-format 引用），状态消失即移除
+        for pid, st in pane_states.items():
+            ball = render([st], now_ms)
+            if pane_ball_cache.get(pid) != ball:
+                tmux("set-option", "-p", "-t", pid, "@clw_ball", ball)
+                pane_ball_cache[pid] = ball
+                changed = True
+        for pid in list(pane_ball_cache):
+            if pid not in pane_states and pane_ball_cache[pid] != "":
+                tmux("set-option", "-up", "-t", pid, "@clw_ball")
+                pane_ball_cache[pid] = ""
+                changed = True
+        # pane 标题栏自动开关：窗口 pane 数 >1 才显示（单 pane 不浪费一行）
+        for win, cnt in win_counts.items():
+            want = cnt > 1
+            if border_cache.get(win) != want:
+                if want:
+                    tmux("set-option", "-w", "-t", win, "pane-border-status", "top")
+                else:
+                    tmux("set-option", "-uw", "-t", win, "pane-border-status")
+                border_cache[win] = want
+                changed = True
+        for win in list(border_cache):
+            if win not in win_counts:
+                del border_cache[win]
         if changed:
             tmux("refresh-client", "-S")
 

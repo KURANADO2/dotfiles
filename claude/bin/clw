@@ -1,26 +1,37 @@
 #!/usr/bin/env bash
 # =============================================================================
-# clw —— 在当前目录开一个新 tmux 窗口，里面启动一个真彩色的 claude 会话
-# （claude-in-window 的缩写；「AI 自开新会话接力」的标准入口）
+# clw —— 拉起一个真彩色 + 跳过权限确认的 claude 新会话
+# （claude-work 的缩写；「AI 自开新会话接力」的标准入口）
+#
+# 默认行为：在「发起调用的那个 pane」右侧分出一个新 pane——父子会话同屏，
+# 谱系可见（新 pane 标题带任务名和 ↳ 代数标记；F2 弹出全局谱系树视图）
+# -w 开关恢复旧行为：开独立新窗口（适合长期任务/需要大画面的场景）
 #
 # 用法：
-#   clw                        # 只开窗口，交互输入
-#   clw 窗口名                  # 指定窗口名
-#   clw 窗口名 "初始提示词..."    # 开窗口并把提示词作为首条消息直接开工
-#   clw 窗口名 -c               # 续上该目录最近的会话（claude --continue）
-#   clw 窗口名 --brief-file 路径  # 从文件读简报作为初始提示词（超长交接简报
-#                               # 走文件传递，规避命令行转义风险；handoff skill 用）
+#   clw [-w]                          # 交互启动（无初始提示词）
+#   clw [-w] 任务名                    # 指定 pane 标题（-w 时为窗口名）
+#   clw [-w] 任务名 "初始提示词..."      # 带首条消息直接开工
+#   clw [-w] 任务名 -c                 # 续上该目录最近的会话（claude --continue）
+#   clw [-w] 任务名 --brief-file 路径   # 超长简报走文件（handoff skill 标准用法）
 #
-# 典型接力场景：老会话发现问题需另起单 →
-#   让老会话执行：clw fix-xxx --brief-file /tmp/handoff-fix-xxx.md
-#   新窗口弹出即开工；v2.1.178+ 的 claude 会自动把 tmux 里拉起的新会话
-#   识别为顶层会话，transcript 正常落盘、可被 --resume 找回
+# 谱系元数据（写到新 pane 的用户选项上，供标题栏与 clw-tree 树视图渲染）：
+#   @clw_parent_pane = 发起 clw 的 pane id（取自 TMUX_PANE 环境变量）
+#   @clw_depth       = 父 pane 的代数 + 1（裸 shell/无标记 pane 视为第 0 代）
 #
-# 为什么套 env -u TMUX：claude 检测到 TMUX 变量会降级 256 色主题
-# （与 .zshrc 里 alias claude='env -u TMUX claude' 同一原因；但 alias 只在
-# 交互 shell 生效，脚本里必须显式去掉）
+# 为什么带 --dangerously-skip-permissions：用户明确要求的固定工作方式，
+# 接力会话无人值守直接开工；配合简报里写清文件边界来控制风险
+# 为什么套 env -u TMUX：claude 检测到 TMUX 变量会降级 256 色主题（与
+# .zshrc 的 alias claude 同一原因）；TMUX_PANE 保留，彩球 hooks 依赖它
+# remain-on-exit failed：claude 正常退出后 pane 自动关闭不堆尸体，
+# 异常退出（崩溃）才保留现场便于排查
 # =============================================================================
 set -e
+
+window_mode=0
+if [ "${1:-}" = "-w" ]; then
+  window_mode=1
+  shift
+fi
 
 name="${1:-claude}"
 [ $# -gt 0 ] && shift
@@ -42,11 +53,35 @@ dir="$(pwd)"
 if [ $# -gt 0 ]; then
   # 用 %q 安全转义每个参数，避免提示词里的引号/空格/特殊字符破坏嵌套命令
   args=$(printf '%q ' "$@")
-  cmd="env -u TMUX claude $args"
+  cmd="env -u TMUX claude --dangerously-skip-permissions $args"
 else
-  cmd="env -u TMUX claude"
+  cmd="env -u TMUX claude --dangerously-skip-permissions"
 fi
 
-# 窗口退出后保留内容便于排查（claude 崩溃/闪退时能看到现场），按 q 或手动关
-tmux new-window -n "$name" -c "$dir" "$cmd" \; set-option -w remain-on-exit on
-echo "已开新窗口 [$name]：$dir"
+# ---- 谱系：我是谁拉起来的 ----
+parent_pane="${TMUX_PANE:-}"
+depth=1
+if [ -n "$parent_pane" ]; then
+  pdepth=$(tmux show-options -p -t "$parent_pane" -v @clw_depth 2>/dev/null || true)
+  depth=$(( ${pdepth:-0} + 1 ))
+fi
+
+# ---- 建 pane（默认）或窗口（-w / 无 TMUX_PANE 时兜底） ----
+if [ -n "$parent_pane" ] && [ "$window_mode" -eq 0 ]; then
+  new_pane=$(tmux split-window -h -P -F '#{pane_id}' -t "$parent_pane" -c "$dir" "$cmd")
+  where="当前窗口右侧新 pane "
+else
+  new_pane=$(tmux new-window -P -F '#{pane_id}' -n "$name" -c "$dir" "$cmd")
+  where="新窗口"
+fi
+
+tmux set-option -p -t "$new_pane" remain-on-exit failed
+tmux set-option -p -t "$new_pane" @clw_depth "$depth"
+if [ -n "$parent_pane" ]; then
+  tmux set-option -p -t "$new_pane" @clw_parent_pane "$parent_pane"
+fi
+tmux select-pane -t "$new_pane" -T "$name"
+# 立即点亮该窗口的 pane 标题栏（之后由彩球守护进程按 pane 数自动维护开关）
+tmux set-option -w -t "$new_pane" pane-border-status top 2>/dev/null || true
+
+echo "已在${where}开出 [$name]：$dir（谱系第 ${depth} 代，pane ${new_pane}）"

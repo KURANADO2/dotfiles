@@ -5,6 +5,7 @@
 - 用户的终端是 kitty + tmux：kitty 快捷键经 `send_text` 注入「C-Space 前缀 + 命令键」操作 tmux，用户本人从不手按前缀键（物理 Ctrl-Space 被 macOS 输入法占用）
 - 会话结构：`tnew <名字>` 创建或打开会话（main 按 `tmux/workspace/[local/]main.conf` 建工作区，local/ 为各机器私有配置不进仓库）；`cmd+n` 新 OS 窗口是裸 zsh（不自动进 tmux，专供 ssh 远程等场景）；远程服务器 ssh 登录同样是裸 zsh，手动 tnew，两边行为一致
 - `cmd+d` = detach（原生 prefix d）：会话转后台持久运行，窗口回到裸 zsh 提示符（tnew 的 attach 不用 exec），再次 `tnew <名字>` 接回
+- 任务会话拉起：`clw <任务名>` 默认**在当前窗口右侧分出新 pane**（`-w` 改开独立窗口），自动带 `--dangerously-skip-permissions`（用户指定的无人值守接力模式，简报里必须写清文件边界）；新 pane 写入谱系元数据 `@clw_parent_pane`/`@clw_depth`，窗口 pane 数 >1 时自动显示 pane 标题栏（本 pane 彩球 + ↳代数 + 任务名，由彩球守护进程维护开关）；**F2** 弹出全局谱系树视图（输入编号跳转对应 pane），`cmd+shift+x` 关闭 pane（带确认）
 - 交互式 claude 通过 alias 以 `env -u TMUX claude` 启动（TMUX 变量会让 claude 降级 256 色）；因此进程内 **没有 TMUX 变量但保留 TMUX_PANE**
 - claude 状态显示在 tmux 状态栏（hooks + 守护进程驱动）：窗口条目里每个跑 claude 的 pane 一颗彩球——🟢 闪烁=干活中、🔴 快闪=需要用户确认（PermissionRequest/Elicitation 开口瞬间触发，无延迟）、🟡 常亮=完成或空闲（会话一打开就是黄球，与实体灯 idle 语义一致），闪烁节奏与桌面实体 ESP32 红绿灯（traffic_light 固件 600/180ms）一致；没跑 claude 的 pane/窗口不显示球。hook 是边沿触发可能漏事件，守护进程每 3 秒用 `claude agents --json`（官方外部状态接口）按 sessionId 对照权威 busy/waiting/idle 纠偏兜底。早期方案的 pane 边框染色已废弃（会被活动 pane 的蓝色边框覆盖）
 
@@ -16,7 +17,7 @@
 
 ## 任务接力（另起单）
 
-1. 需要新会话接续工作时，用 `clw <窗口名> "<交接简报>"`（在 PATH 中）在当前目录开新 tmux 窗口并直接开工；简报要自包含：背景、要做什么、关键文件、验收标准。完整规程（简报落盘、登记簿标记、`--brief-file` 传参）见 **handoff skill**，另起单一律走该 skill
+1. 需要新会话接续工作时，用 `clw <任务名> --brief-file <简报路径>`（在 PATH 中）在当前目录的**当前窗口右侧分出新 pane** 直接开工；简报要自包含：背景、要做什么、关键文件、验收标准。完整规程（简报落盘、登记簿标记）见 **handoff skill**，另起单一律走该 skill；长期任务或需要大画面时用 `clw -w` 开独立窗口
 2. 禁止用 `tmux send-keys` 向另一个**正在运行的交互式 claude 会话**注入文字（无官方保证，会窜键）；拉新会话时把 prompt 作为 clw 参数传入即可
 3. 与并行会话协调优先用 ListAgents / SendMessage 跨会话消息（v2.1.224+ 默认开启），可订阅对方空闲通知
 4. 脚本化提取历史会话结论用 `claude -p --resume <session-id> --output-format json "..."`（可跨目录）
@@ -29,7 +30,7 @@
 
 1. 任何会话在结论中写「建议另起单」时，**必须同步向登记簿追加一条 `[open]` 条目**——只说不记视为违规
 2. 修复完成的会话负责把对应条目改为 `[done]` 销单（handoff 交接简报末尾会附这条职责）
-3. 交接时把条目标为 `[handed-off(窗口名)]`；状态生命周期：`[open]` → `[handed-off(窗口名)]` → `[done]`
+3. 交接时把条目标为 `[handed-off(任务名)]`；状态生命周期：`[open]` → `[handed-off(任务名)]` → `[done]`（任务名 = clw 的 pane 标题）
 
 ### 条目模板
 

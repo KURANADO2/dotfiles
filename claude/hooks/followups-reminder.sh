@@ -3,7 +3,7 @@
 # followups-reminder.sh —— SessionStart hook：开门播报待办登记簿
 #
 # 新会话开始时检查本项目的待办登记簿（~/.claude/followups/<项目名>.md），
-# 有未关闭条目（[open] / [handed-off(窗口名)]）就把清单打印到 stdout——
+# 有未关闭条目（[open] / [handed-off(任务名)]）就把清单打印到 stdout——
 # SessionStart hook 的 stdout 会注入会话上下文，会话一开门就知道欠了什么账。
 # 无登记簿或无未关闭条目则完全静默。
 #

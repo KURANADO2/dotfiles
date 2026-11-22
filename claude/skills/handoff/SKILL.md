@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Use when 需要另起单、任务交接、handoff、开新会话修复某个问题时——生成自包含的四段式交接简报、在待办登记簿登记并标记条目，再用 clw 拉起新 tmux 窗口直接开工。触发词：另起单、交接、handoff、开新会话修复。
+description: Use when 需要另起单、任务交接、handoff、开新会话修复某个问题时——生成自包含的四段式交接简报、在待办登记簿登记并标记条目，再用 clw 在当前窗口分出新 pane 直接开工。触发词：另起单、交接、handoff、开新会话修复。
 ---
 
 # handoff —— 任务接力操作规程
@@ -20,26 +20,26 @@ description: Use when 需要另起单、任务交接、handoff、开新会话修
 
 ## 2. 简报落盘为临时文件
 
-写入 `/tmp/handoff-<窗口名>-$(date +%Y%m%d).md`。用文件传递而非命令行参数，规避超长简报的转义风险。
+写入 `/tmp/handoff-<任务名>-$(date +%Y%m%d).md`。用文件传递而非命令行参数，规避超长简报的转义风险。
 
 ## 3. 登记簿标记 handed-off
 
 登记簿路径 `~/.claude/followups/<项目名>.md`（项目名 = git 主仓库根目录 basename，worktree 归一到主仓库；非 git 目录用 cwd 的 basename）：
 
-- 对应条目已存在 → 把状态标记改为 `[handed-off(窗口名)]`
-- 尚未登记（本会话现场发现的问题）→ 先按 CLAUDE.tmux.md 的条目模板追加 `[open]` 条目，再改为 `[handed-off(窗口名)]`
+- 对应条目已存在 → 把状态标记改为 `[handed-off(任务名)]`
+- 尚未登记（本会话现场发现的问题）→ 先按 CLAUDE.tmux.md 的条目模板追加 `[open]` 条目，再改为 `[handed-off(任务名)]`
 - 登记簿文件不存在 → 连同文件头一起创建（模板见 CLAUDE.tmux.md）
 
-## 4. 拉起新窗口
+## 4. 拉起新 pane
 
 在**目标工程目录**（不是 dotfiles）执行：
 
 ```bash
-clw <窗口名> --brief-file /tmp/handoff-<窗口名>-<日期>.md
+clw <任务名> --brief-file /tmp/handoff-<任务名>-<日期>.md
 ```
 
-窗口名用短横线小写风格、动词开头，如 `fix-followups-count`。
+默认在当前窗口右侧分出新 pane（长期任务/需要大画面时加 `-w` 开独立窗口）。任务名用短横线小写风格、动词开头，如 `fix-followups-count`。注意：clw 默认带 `--dangerously-skip-permissions`（无人值守接力），简报的文件边界必须写清。
 
 ## 5. 回报
 
-向用户汇报三件事：新窗口名、简报文件路径、登记簿条目的状态变化（`[open]` → `[handed-off(窗口名)]`）。
+向用户汇报三件事：新 pane 的任务名、简报文件路径、登记簿条目的状态变化（`[open]` → `[handed-off(任务名)]`）。

@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""clw 谱系树视图 —— 看清「哪个 claude 会话是谁开出来的」
+
+tmux 里按 F2（kitty 里也是 F2，经 send_text 转发）弹出浮层运行本脚本；
+也可以在任何终端直接执行 `clw-tree` 查看（--dump 只打印不交互）。
+
+渲染层级：会话 → 窗口 → pane 谱系森林。
+- clw 派生的 pane 带 ↳代数 标记，缩进挂在父 pane 之下
+- claude pane 带静态彩球：🟢 working / 🔴 waiting / 🟡 done（闪烁由
+  守护进程负责画在 pane 标题栏和状态栏上，这里只求一眼可读）
+- 每个 pane 前有编号，输入编号回车即跳转（switch-client + select-pane），
+  浮层随脚本退出自动关闭（display-popup -E）
+"""
+from __future__ import annotations
+
+import subprocess
+import sys
+
+SEP = "\t"
+FMT = SEP.join([
+    "#{session_name}", "#{window_index}", "#{window_name}",
+    "#{pane_id}", "#{pane_index}", "#{@clw_parent_pane}", "#{@clw_depth}",
+    "#{@claude_state}", "#{pane_title}", "#{pane_current_command}",
+    "#{pane_dead}",
+])
+
+BALL = {"working": "🟢", "waiting": "🔴", "done": "🟡"}
+
+
+def tmux(*args: str) -> subprocess.CompletedProcess:
+    return subprocess.run(["tmux", *args], capture_output=True, text=True)
+
+
+def collect() -> list[dict]:
+    result = tmux("list-panes", "-a", "-F", FMT)
+    if result.returncode != 0:
+        print("无法连接 tmux server（需要在 tmux 环境或本机默认 socket 下运行）")
+        sys.exit(1)
+    panes = []
+    for line in result.stdout.splitlines():
+        p = (line.split(SEP) + [""] * 11)[:11]
+        panes.append({
+            "session": p[0], "widx": int(p[1] or 0), "wname": p[2],
+            "id": p[3], "pidx": int(p[4] or 0), "parent": p[5],
+            "depth": p[6], "state": p[7], "title": p[8], "cmd": p[9],
+            "dead": p[10],
+        })
+    return panes
+
+
+def pane_label(p: dict, number: int) -> str:
+    ball = BALL.get(p["state"], "")
+    mark = f"↳{p['depth']} " if p["depth"] else ""
+    label = p["title"] or p["cmd"] or "?"
+    dead = " [已退出]" if p["dead"] == "1" else ""
+    parts = [f"{number:>2}.", p["id"], ball, mark + label, dead]
+    return " ".join(x for x in parts if x)
+
+
+def build_lines(panes: list[dict]) -> tuple[list[str], list[dict]]:
+    lines: list[str] = []
+    numbered: list[dict] = []
+
+    sessions: dict[str, dict] = {}
+    for p in panes:
+        sessions.setdefault(p["session"], {}).setdefault(
+            (p["widx"], p["wname"]), []).append(p)
+
+    sess_names = sorted(sessions)
+    for si, sess in enumerate(sess_names):
+        last_s = si == len(sess_names) - 1
+        lines.append(f"{'└─' if last_s else '├─'} 会话 {sess}")
+        sess_pre = "    " if last_s else "│   "
+        wins = sessions[sess]
+        win_keys = sorted(wins)
+        for wi, wkey in enumerate(win_keys):
+            last_w = wi == len(win_keys) - 1
+            widx, wname = wkey
+            lines.append(f"{sess_pre}{'└─' if last_w else '├─'} 窗口 {widx} {wname}")
+            win_pre = sess_pre + ("    " if last_w else "│   ")
+            wpanes = sorted(wins[wkey], key=lambda x: x["pidx"])
+            ids = {p["id"] for p in wpanes}
+            children: dict[str, list[dict]] = {}
+            roots: list[dict] = []
+            for p in wpanes:
+                if p["parent"] and p["parent"] in ids and p["parent"] != p["id"]:
+                    children.setdefault(p["parent"], []).append(p)
+                else:
+                    roots.append(p)
+
+            def emit(p: dict, pre: str, is_last: bool) -> None:
+                numbered.append(p)
+                lines.append(pre + ("└─ " if is_last else "├─ ")
+                             + pane_label(p, len(numbered)))
+                kids = children.get(p["id"], [])
+                kid_pre = pre + ("    " if is_last else "│   ")
+                for ki, k in enumerate(kids):
+                    emit(k, kid_pre, ki == len(kids) - 1)
+
+            for ri, r in enumerate(roots):
+                emit(r, win_pre, ri == len(roots) - 1)
+    return lines, numbered
+
+
+def main() -> int:
+    dump = "--dump" in sys.argv
+    panes = collect()
+    lines, numbered = build_lines(panes)
+    print("tmux claude 会话谱系树（🟢干活 🔴等确认 🟡完成/空闲，↳N=clw 第 N 代）")
+    print()
+    for line in lines:
+        print(line)
+    if dump or not sys.stdin.isatty():
+        return 0
+    print()
+    try:
+        choice = input("输入编号跳转到对应 pane（直接回车退出）：").strip()
+    except (EOFError, KeyboardInterrupt):
+        return 0
+    if not choice:
+        return 0
+    if not choice.isdigit() or not (1 <= int(choice) <= len(numbered)):
+        print("无效编号")
+        return 1
+    target = numbered[int(choice) - 1]
+    tmux("switch-client", "-t", f"{target['session']}:{target['widx']}")
+    tmux("select-pane", "-t", target["id"])
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
