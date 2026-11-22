@@ -8,9 +8,11 @@
 #   clw 窗口名                  # 指定窗口名
 #   clw 窗口名 "初始提示词..."    # 开窗口并把提示词作为首条消息直接开工
 #   clw 窗口名 -c               # 续上该目录最近的会话（claude --continue）
+#   clw 窗口名 --brief-file 路径  # 从文件读简报作为初始提示词（超长交接简报
+#                               # 走文件传递，规避命令行转义风险；handoff skill 用）
 #
 # 典型接力场景：老会话发现问题需另起单 →
-#   让老会话执行：clw fix-xxx "交接简报：……。请修复……"
+#   让老会话执行：clw fix-xxx --brief-file /tmp/handoff-fix-xxx.md
 #   新窗口弹出即开工；v2.1.178+ 的 claude 会自动把 tmux 里拉起的新会话
 #   识别为顶层会话，transcript 正常落盘、可被 --resume 找回
 #
@@ -22,6 +24,18 @@ set -e
 
 name="${1:-claude}"
 [ $# -gt 0 ] && shift
+
+# --brief-file <路径>：读文件内容作为初始提示词，其后再跟其他 claude 参数
+if [ "${1:-}" = "--brief-file" ]; then
+  if [ -z "${2:-}" ] || [ ! -f "${2:-}" ]; then
+    echo "clw：--brief-file 需要一个存在的文件路径" >&2
+    exit 1
+  fi
+  brief_file="$2"
+  shift 2
+  # 简报文件内容替换为第一个位置参数，走下方统一的 %q 转义通道
+  set -- "$(cat "$brief_file")" "$@"
+fi
 
 dir="$(pwd)"
 

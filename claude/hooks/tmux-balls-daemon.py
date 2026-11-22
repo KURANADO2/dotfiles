@@ -20,6 +20,12 @@
      （官方支持的外部状态接口），按 pane 的 @claude_session_id 对照权威
      status（busy/waiting/idle）纠偏 @claude_state；会话已消失则清球。
      仅纠偏「hook 写入已超过 4 秒」的 pane，避免与刚触发的 hook 抢写
+  7. 待办计数：每 3 秒（与纠偏同节拍）统计 ~/.claude/followups/*.md 里
+     未关闭条目（顶格「## [open]」/「## [handed-off」标题）总数 N，
+     N>0 时写全局选项 @followups_count=🔔N，N=0 时移除该选项；
+     status-right 引用后显示在状态栏右下角。守护进程随「无 claude 状态
+     5 秒」退出，退出期间计数不更新——但增删条目都发生在 claude 会话里，
+     会话 hook 会重新踢起本进程，滞后窗口极短
 
 调试：TMUX_BALLS_DEBUG=1 时写日志 /tmp/tmux-balls-daemon-<socket>.log
 """
@@ -46,6 +52,11 @@ RED_ON_MS = 180
 AGENTS_POLL_EVERY = 50   # 每 50 tick（3 秒）跑一次 claude agents --json
 AGENTS_TIMEOUT = 2.0     # 子进程超时，超时视为本轮失败
 CORRECT_MIN_AGE = 4.0    # hook 写入超过 N 秒才允许纠偏（大于轮询间隔，防抢写）
+
+# ---- 待办登记簿计数（status-right 的 🔔N） ----
+FOLLOWUPS_DIR = os.path.expanduser("~/.claude/followups")
+FOLLOWUPS_POLL_EVERY = 50   # 每 50 tick（3 秒）全量重算一次（纯本地读文件，开销可忽略）
+FOLLOWUPS_PREFIXES = ("## [open]", "## [handed-off")   # 顶格二级标题才算条目
 
 # claude agents --json 的 status/state → 彩球状态
 STATUS_MAP = {"busy": "working", "waiting": "waiting", "idle": "done"}
@@ -168,6 +179,28 @@ def correct_states(panes: list[dict], agents: dict[str, str]) -> None:
                  "@claude_state_ts", str(int(now)))
 
 
+def count_followups() -> int:
+    """统计全部登记簿里未关闭（[open]/[handed-off]）的条目数。
+    条目 = 顶格二级标题「## [状态] 日期 标题」；文档模板里缩进的示例行
+    不顶格，不会误计。目录缺失/文件不可读一律按 0/跳过处理。"""
+    total = 0
+    try:
+        names = sorted(os.listdir(FOLLOWUPS_DIR))
+    except OSError:
+        return 0
+    for name in names:
+        if not name.endswith(".md"):
+            continue
+        try:
+            with open(os.path.join(FOLLOWUPS_DIR, name), encoding="utf-8") as fh:
+                for line in fh:
+                    if line.startswith(FOLLOWUPS_PREFIXES):
+                        total += 1
+        except OSError:
+            continue
+    return total
+
+
 def render(states: list[str], now_ms: int) -> str:
     green_on = (now_ms % GREEN_PERIOD_MS) < GREEN_ON_MS
     red_on = (now_ms % RED_PERIOD_MS) < RED_ON_MS
@@ -201,6 +234,7 @@ def main() -> int:
     log(f"daemon 启动 sock={SOCK_ID} pid={os.getpid()}")
 
     cache: dict[str, str] = {}   # window_id → 上次写入的彩球串
+    followups_cache: str | None = None   # 上次写入的 @followups_count 值
     states: dict[str, list[str]] = {}
     panes: list[dict] = []
     last_state_seen = time.monotonic()
@@ -223,6 +257,18 @@ def main() -> int:
             agents = fetch_agents()
             if agents is not None:
                 correct_states(panes, agents)
+        # 待办计数：3 秒一次，只在数值变化时写选项（避免无谓刷新状态栏）
+        if tick % FOLLOWUPS_POLL_EVERY == 0:
+            n = count_followups()
+            label = f"🔔{n}" if n > 0 else ""
+            if label != followups_cache:
+                if label:
+                    tmux("set-option", "-g", "@followups_count", label)
+                else:
+                    tmux("set-option", "-gu", "@followups_count")
+                tmux("refresh-client", "-S")
+                followups_cache = label
+                log(f"待办计数 → {label or '(清空)'}")
         tick += 1
 
         if states:

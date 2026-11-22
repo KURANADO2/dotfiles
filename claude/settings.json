@@ -169,6 +169,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.dotfiles/claude/hooks/followups-reminder.sh",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "Stop": [

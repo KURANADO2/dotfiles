@@ -65,6 +65,15 @@ link "$REPO/yazi"                   "$XDG/yazi"
 link "$REPO/p10k/.p10k.zsh"         "$HOME/.p10k.zsh"
 link "$REPO/claude/settings.json"   "$HOME/.claude/settings.json"
 link "$REPO/claude/CLAUDE.md"       "$HOME/.claude/CLAUDE.md"
+link "$REPO/claude/skills"          "$HOME/.claude/skills"
+
+# ---- 待办登记簿目录（仓库外集中存放，每项目一册 <项目名>.md， ----
+# ---- 格式与硬规则见 claude/CLAUDE.tmux.md「待办登记簿」一节）    ----
+if [ "${DRY_RUN:-0}" = "1" ]; then
+  echo "[演练] 将创建目录: $HOME/.claude/followups"
+else
+  mkdir -p "$HOME/.claude/followups"
+fi
 
 # ---- macOS 专属 ----
 if [ "$OS" = "Darwin" ]; then

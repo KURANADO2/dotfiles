@@ -97,7 +97,11 @@ jq（claude statusline，可选）。settings.json 里的 traffic_light/osascrip
 - claude 状态经 hooks 显示为状态栏彩球：🟢 干活中(600ms 闪) / 🔴 等确认(180ms 快闪) /
   🟡 完成或空闲(常亮)，节奏与桌面实体 ESP32 红绿灯（traffic_light）一致；
   F1 广播模式在右下角显示「📢 广播中」常驻指示
-- 任务接力：`clw <窗口名> "<交接简报>"` 开新 tmux 窗口拉起新 claude 会话
+- 待办登记簿：跨会话台账 `~/.claude/followups/<项目名>.md`（按 git 主仓库归一，worktree
+  不分裂），SessionStart 开门播报本项目未关闭条目，状态栏右下角常显「🔔N」全局计数；
+  「建议另起单」必须登记、修复完成必须销单（硬规则见 `claude/CLAUDE.tmux.md`）
+- 任务接力：handoff skill 生成四段式交接简报 → 登记簿标 `[handed-off(窗口名)]` →
+  `clw <窗口名> --brief-file <简报路径>` 开新 tmux 窗口拉起新 claude 会话直接开工
 - 细节见 `claude/README.md` 与 `tmux/.tmux.conf` 内逐项注释（每项标注 tmux 原始命令与默认键）
 
 ## Update Lazyvim
