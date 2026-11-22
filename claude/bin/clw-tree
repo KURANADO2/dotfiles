@@ -102,6 +102,54 @@ def build_lines(panes: list[dict]) -> tuple[list[str], list[dict]]:
     return lines, numbered
 
 
+def read_choice(total: int) -> int:
+    """原始模式逐键读取编号。返回 0 表示退出。
+    - Esc / Ctrl-C / Ctrl-D：退出（无需回车，符合终端直觉）
+    - 数字：累积输入；当「再补一位必然超界」时自动确认（如总数 ≤9 时
+      输入单个数字立即跳转，不用按回车）
+    - 回车：确认已输入的数字；空输入时等同退出
+    - 退格：删掉最后一位
+    行模式（input()）下 Esc 必须跟回车才能被读到，所以这里用 cbreak。"""
+    import termios
+    import tty
+    fd = sys.stdin.fileno()
+    old_attr = termios.tcgetattr(fd)
+    buf = ""
+    print(f"\n输入编号跳转（1-{total}）· Esc 退出 · 退格修改：", end="", flush=True)
+    try:
+        tty.setcbreak(fd)
+        while True:
+            ch = sys.stdin.read(1)
+            if not ch or ch in ("\x1b", "\x03", "\x04"):   # EOF / Esc / Ctrl-C / Ctrl-D
+                print()
+                return 0
+            if ch in ("\r", "\n"):                          # 回车
+                print()
+                return int(buf) if buf else 0
+            if ch in ("\x7f", "\x08"):                      # 退格
+                if buf:
+                    buf = buf[:-1]
+                    print("\b \b", end="", flush=True)
+                continue
+            if ch.isdigit():
+                n = int(buf + ch)
+                if n > total:                               # 超界：清空重输
+                    print(f"\n编号超出范围（1-{total}），重新输入：", end="", flush=True)
+                    buf = ""
+                    continue
+                buf += ch
+                print(ch, end="", flush=True)
+                if n * 10 > total:                          # 再补一位必超界 → 自动确认
+                    print()
+                    return n
+                continue
+            # 其余按键忽略
+    except KeyboardInterrupt:
+        return 0
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_attr)
+
+
 def main() -> int:
     dump = "--dump" in sys.argv
     panes = collect()
@@ -110,19 +158,12 @@ def main() -> int:
     print()
     for line in lines:
         print(line)
-    if dump or not sys.stdin.isatty():
+    if dump or not sys.stdin.isatty() or not numbered:
         return 0
-    print()
-    try:
-        choice = input("输入编号跳转到对应 pane（直接回车退出）：").strip()
-    except (EOFError, KeyboardInterrupt):
-        return 0
+    choice = read_choice(len(numbered))
     if not choice:
         return 0
-    if not choice.isdigit() or not (1 <= int(choice) <= len(numbered)):
-        print("无效编号")
-        return 1
-    target = numbered[int(choice) - 1]
+    target = numbered[choice - 1]
     tmux("switch-client", "-t", f"{target['session']}:{target['widx']}")
     tmux("select-pane", "-t", target["id"])
     return 0
