@@ -1,8 +1,13 @@
 #!/bin/bash
 # Claude Code status line — mirrors the Starship prompt (~/.config/starship.toml).
-# Module order: [os] [directory] [git_branch] [git_status] [languages] [model] [ctx]
+# Module order: [directory] [git_branch] [git_status] [languages] [model] [ctx]
 # (left prompt first, then Claude extras; time/proxy removed per user request)
 # The trailing '➜' (character module) is intentionally omitted.
+# [os] 系统图标已按用户要求于 2026-11 移除：原实现写死 🍎（无平台判断，Linux 上
+# 也显示苹果），且每个会话都挂一个系统图标纯属冗余。系统图标改由 tmux 状态栏
+# 左下角唯一展示（见 tmux/.tmux.conf status-left 的 if-shell uname 分支）。
+# 移除后本行以目录开头（第 0 列），与 Claude Code 原生「⏵⏵ bypass permissions on」
+# 提示行左缘对齐。注意 starship 提示符本身仍保留 [os] 模块，两边不再逐模块一致。
 
 set -u
 
@@ -19,7 +24,6 @@ IFS=$'\t' read -r cwd model context_pct < <(printf '%s' "$input" | jq -r '[
 
 # --- Colors approximating starship styles (#82AAFF ≈ 256-color 111) ---
 R=$'\e[0m'
-C_OS=$'\e[1;37m'           # [os] bold white
 C_DIR=$'\e[1;38;5;111m'    # [directory] style = 'bold #82AAFF'
 C_BRANCH=$'\e[1;35m'       # [git_branch] starship default: bold purple
 C_GITST=$'\e[1;38;5;111m'  # [git_status] style = 'bold #82AAFF'
@@ -32,17 +36,13 @@ C_MODEL=$'\e[35m'          # Claude model
 C_CTX=$'\e[33m'            # context usage
 
 # --- Prompt glyphs, emitted via printf byte escapes (pure ASCII on disk) ---
-# Why not literal glyphs: the original os/branch characters were silently
-# dropped to plain spaces by the editing pipeline that first wrote this script,
-# so the status line rendered invisible placeholders. Keep these as escapes;
-# do NOT "simplify" them back into literal characters.
-SYM_OS=$(printf '\xf0\x9f\x8d\x8e')      # U+1F34E red apple — starship 1.22 [os] macOS default symbol
+# Why not literal glyphs: the original branch character was silently
+# dropped to a plain space by the editing pipeline that first wrote this script,
+# so the status line rendered an invisible placeholder. Keep this as an escape;
+# do NOT "simplify" it back into a literal character.
 SYM_BRANCH=$(printf '\xee\x82\xa0')      # U+E0A0 (Nerd Font) — starship [git_branch] default symbol
 
 parts=()
-
-# [os] module — enabled in starship.toml; macOS symbol (SYM_OS above)
-parts+=("${C_OS}${SYM_OS}${R}")
 
 # [directory] — truncation_length = 0 / truncate_to_repo = false → full path, $HOME → ~
 home_sym='~'
