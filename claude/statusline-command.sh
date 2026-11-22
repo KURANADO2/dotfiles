@@ -9,11 +9,10 @@ set -u
 input=$(cat)
 
 # Parse the JSON input once (tab-separated; safe for paths containing spaces)
-IFS=$'\t' read -r cwd model context_pct worktree < <(printf '%s' "$input" | jq -r '[
+IFS=$'\t' read -r cwd model context_pct < <(printf '%s' "$input" | jq -r '[
   .workspace.current_dir // "",
   .model.display_name // "",
-  ((.context_window.used_percentage // "") | if type == "number" then (round | tostring) else tostring end),
-  .workspace.git_worktree // ""
+  ((.context_window.used_percentage // "") | if type == "number" then (round | tostring) else tostring end)
 ] | @tsv')
 
 [ -n "$cwd" ] || cwd=$PWD
@@ -97,7 +96,8 @@ if [ -n "$gitout" ]; then
 
   git_part="${C_BRANCH}${SYM_BRANCH} ${branch}${R}"
   [ -n "${st}${ab}" ] && git_part+=" ${C_GITST}[${st}${ab}]${R}"
-  [ -n "$worktree" ] && git_part+=" ${C_GITST}(${worktree})${R}"
+  # 有意不展示 workspace.git_worktree 标签：在工作树里时目录路径已以其名字结尾、
+  # 分支名又形如 worktree-<名字>，第三次重复纯属噪音（按用户要求于 2026-11 移除）
   parts+=("$git_part")
 fi
 
