@@ -60,8 +60,7 @@ attach 一律不用 exec：detach（`cmd+d`）后 tmux 客户端退出，当前�
 |---|---|---|---|---|
 | `cmd+enter` | `Enter` | 右侧竖分（当前目录） | `split-window -h -c "#{pane_current_path}"` | `prefix %` |
 | — | `%` | 右侧竖分（原生键补上当前路径） | `split-window -h -c` | `prefix %` |
-| — | `"` | 上下横分（当前目录）⚠️ 见下方冲突说明 | `split-window -v -c` | `prefix "` |
-| `ctrl+cmd+shift+.` | `"` | 把当前 pane 送到右邻窗口 ⚠️ | 设计意图 `move-pane -t :{next}`，当前被上行覆盖 | 无 |
+| `ctrl+cmd+shift+.` | `"` | 把当前 pane 送到右邻窗口 | `move-pane -t :{next}` | 无 |
 | `ctrl+cmd+shift+,` | `'` | 把当前 pane 送到左邻窗口 | `move-pane -t :{previous}` | 无 |
 | `cmd+shift+]` | `o` | 下一个 pane（缩放态保持缩放） | `select-pane -t :.+ -Z` | `prefix o`（原生不带 -Z） |
 | `cmd+shift+[` | `O` | 上一个 pane（缩放态保持缩放） | `select-pane -t :.- -Z` | 无 |
@@ -69,7 +68,7 @@ attach 一律不用 exec：detach（`cmd+d`）后 tmux 客户端退出，当前�
 | `cmd+shift+,` | `{` | 与上一个 pane 换位 | `swap-pane` | `prefix {` |
 | `cmd+shift+x` | `x` | 关闭当前 pane（确认弹窗） | `confirm-before kill-pane` | `prefix x` |
 
-> ⚠️ 已知冲突：`"` 在 `.tmux.conf` 里被绑定了两次（`move-pane` 送右邻在前、`split-window -v` 补路径在后），后者生效——因此 `ctrl+cmd+shift+.` 当前实际行为是上下横分，而不是设计意图的「送 pane 到右邻窗口」。待修复，修复后更新本表
+> 上下横分不占前缀键：原生 `prefix "` 已让位给「送 pane 到右邻窗口」，需要时执行 `tmux split-window -v -c "#{pane_current_path}"`
 
 ### 2.3 布局
 
