@@ -2,6 +2,8 @@
 
 kitty / tmux / zsh / nvim / claude code 等个人配置，macOS 本机与 Linux 远程服务器均可一键部署。
 
+![](demo.png)
+
 ## Install
 
 仓库可 clone 到任意路径（本机 `~/Code/GitHub/dotfiles`，远程 `~/github/dotfiles`），
