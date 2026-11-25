@@ -23,3 +23,14 @@ vim.opt.jumpoptions = "stack"
 -- 注意反向不通：Mac 上复制的内容进不了 "+p（tmux 只代理 OSC 52 的写，
 -- 不代理读），那条路要用终端自己的粘贴（kitty Cmd+V）
 vim.opt.clipboard = "unnamedplus"
+
+-- 补丁：TMUX 变量被剥掉、但实际仍在 tmux 里的场景（特征：TMUX_PANE 还在）。
+-- 典型来源是 claude code 的 alias `env -u TMUX claude`（防 claude 降级 256 色），
+-- ctrl+o → v 用它拉起的 nvim 看会话记录时，环境里没有 TMUX。此时上面那条链
+-- 两头全断：自动探测的 tmux provider 要求 $TMUX 非空（clipboard.vim 258 行），
+-- OSC 52 兜底又要求 clipboard 为空（260 行，被上面的 unnamedplus 挡掉），
+-- 结果 provider 为空，y 只进内部寄存器，复制不到 Mac。
+-- 显式指定字符串形式的 g:clipboard，走和自动探测完全相同的 s:set_tmux()
+if not vim.env.TMUX and vim.env.TMUX_PANE then
+  vim.g.clipboard = "tmux"
+end
