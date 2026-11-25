@@ -108,7 +108,7 @@ if [ "$OS" = "Darwin" ]; then
   else
     echo "⚠️  未检测到 tmux（需要 ≥ 3.3）"
   fi
-  echo "ℹ️  macOS 全套完成。kitty 内新窗口会自动进入 tmux（见 zsh/.zshrc 末尾）。"
+  echo "ℹ️  macOS 全套完成。kitty 不自动进 tmux，干活前手动 tnew <名字> 进入工作区（见 README「工作流与快捷键」）。"
 else
   echo "ℹ️  远程最小集完成（未链接 Mac 专属的 zshrc/kitty/cursor 等）。"
   echo "ℹ️  请把下面几行加进远程的 ~/.zshrc 或 ~/.bashrc（ssh 登录为裸 shell，与本机一致，手动 tnew 进 tmux）："
