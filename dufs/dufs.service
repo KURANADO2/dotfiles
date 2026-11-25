@@ -1,0 +1,14 @@
+[Unit]
+Description=dufs file server (~/public, bound to Tailscale IP, tailnet-only)
+Documentation=https://github.com/sigoden/dufs
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+# 绑定 Tailscale 虚拟网卡 IP（启动时动态获取），只在 tailnet 内可见，不暴露局域网
+ExecStart=/bin/sh -c 'exec %h/.local/bin/dufs %h/public --bind "$(tailscale ip -4)" --port 5000 --allow-upload --allow-search --allow-archive'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

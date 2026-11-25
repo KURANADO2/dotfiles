@@ -88,6 +88,11 @@ if [ "$OS" = "Darwin" ]; then
   link "$REPO/lazydocker"                         "$HOME/Library/Application Support/jesseduffield/lazydocker"
 fi
 
+# ---- Linux 专属 ----
+if [ "$OS" = "Linux" ]; then
+  link "$REPO/dufs/dufs.service" "$XDG/systemd/user/dufs.service"
+fi
+
 echo
 # ---- 收尾提醒 ----
 if [ ! -f "$HOME/.claude_env" ]; then
@@ -115,4 +120,13 @@ else
   echo "ℹ️  远程机器的工作区定义请放 ~/.dotfiles/tmux/workspace/local/main.conf"
   echo "    （local/ 不进仓库，各机器写自己的目录；没有它 tnew main 建普通空会话）"
   echo "ℹ️  settings.json 里的 traffic_light hooks 已带存在性守卫，远程没有该仓库时静默跳过。"
+  # dufs 文件共享服务（~/public，仅 tailnet 可见），细节见 README「dufs 文件共享」一节
+  if [ -x "$HOME/.local/bin/dufs" ]; then
+    systemctl --user daemon-reload 2>/dev/null || true
+    systemctl --user enable --now dufs 2>/dev/null || true
+    loginctl enable-linger "$USER" 2>/dev/null || true
+    echo "ℹ️  dufs 已启用：HTML/报告写 ~/public，tailnet 内访问 http://$(tailscale ip -4 2>/dev/null || echo '<tailscale-IP>'):5000"
+  else
+    echo "⚠️  未检测到 ~/.local/bin/dufs，~/public 文件共享不可用；安装见 README「dufs 文件共享」一节"
+  fi
 fi
