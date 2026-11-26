@@ -71,6 +71,8 @@
 
 - 开始任何会写文件的任务前先调 EnterWorktree；纯查询、问答、只读分析不触发
 - worktree.baseRef 已设为 head（~/.claude/settings.json），不要改回 fresh——fresh 从 origin 切分支，会丢掉本地未推送提交作为基线，合并必冲突
+- EnterWorktree 的「是否 git 仓库」检测只在 claude 进程启动时做一次并缓存，不会复查磁盘：新项目务必先 `git init` + 首次提交再开会话；先开会话、后 init 的目录，该会话内 EnterWorktree 终身必失败（磁盘上仓库健康也报 not in a git repository），踩到后禁止反复重试、也不要去配 WorktreeCreate hooks（那是非 git 版本控制的兜底提示），唯一解是请用户重启进程（`claude --continue` 可恢复历史）
+- 手动副本目录（mkdir/cp 出来的「工作树」）不是真 worktree：无 .git、不在 `git worktree list` 注册、走不了分支合并流程，只能作为上一条场景的降级方案，且改动必须手动回迁主工作区
 - 收尾用 ExitWorktree：无需保留选 remove，需保留选 keep；有未提交改动时 remove 会被拦，先与用户确认
 - 提交只挑本任务的文件；工作区里非本任务的改动属于其他会话，禁止删除、回滚、覆盖
 
