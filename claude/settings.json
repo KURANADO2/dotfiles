@@ -1,29 +1,30 @@
 {
-  "editorMode": "normal",
-  "enabledPlugins": {
-    "chrome-devtools-mcp@claude-plugins-official": true,
-    "context7@claude-plugins-official": true,
-    "dbhub@dbhub": true,
-    "jdtls-lsp@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "mcp__codegraph__codegraph_explore",
+      "mcp__codegraph__codegraph_search",
+      "mcp__codegraph__codegraph_node",
+      "mcp__codegraph__codegraph_callers",
+      "mcp__codegraph__codegraph_callees",
+      "mcp__codegraph__codegraph_impact",
+      "mcp__codegraph__codegraph_files",
+      "mcp__codegraph__codegraph_status",
+      "Bash(tmux *)"
+    ],
+    "defaultMode": "auto"
   },
-  "extraKnownMarketplaces": {
-    "dbhub": {
-      "source": {
-        "repo": "bytebase/dbhub",
-        "source": "github"
-      }
-    }
+  "skillOverrides": {
+    "quarkclouddrive": "off"
   },
   "hooks": {
     "Elicitation": [
       {
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       },
@@ -41,9 +42,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       },
@@ -59,85 +60,85 @@
     ],
     "Notification": [
       {
+        "matcher": "permission_prompt|elicitation_dialog",
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           },
           {
-            "command": "command -v osascript >/dev/null 2>&1 && osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'; exit 0",
-            "type": "command"
+            "type": "command",
+            "command": "command -v osascript >/dev/null 2>&1 && osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'; exit 0"
           }
-        ],
-        "matcher": "permission_prompt|elicitation_dialog"
+        ]
       }
     ],
     "PermissionRequest": [
       {
+        "matcher": "*",
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       },
       {
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
             "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh waiting",
             "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       }
     ],
     "PostToolUse": [
       {
+        "matcher": "*",
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       }
     ],
     "PostToolUseFailure": [
       {
+        "matcher": "*",
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       }
     ],
     "PreToolUse": [
       {
+        "matcher": "*",
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       }
     ],
     "SessionEnd": [
       {
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       },
@@ -155,9 +156,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       },
@@ -184,9 +185,9 @@
       {
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       },
@@ -202,33 +203,33 @@
     ],
     "StopFailure": [
       {
+        "matcher": "*",
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       },
       {
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
             "command": "$HOME/.dotfiles/claude/hooks/tmux-status.sh waiting",
             "timeout": 5
           }
-        ],
-        "matcher": "*"
+        ]
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
           {
+            "type": "command",
             "command": "[ -f \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" ] && python3 \"$HOME/Code/GitHub/traffic_light/scripts/claude_traffic_light.py\" hook; exit 0",
-            "timeout": 5,
-            "type": "command"
+            "timeout": 5
           }
         ]
       },
@@ -243,33 +244,33 @@
       }
     ]
   },
-  "includeCoAuthoredBy": false,
-  "permissions": {
-    "allow": [
-      "mcp__codegraph__codegraph_explore",
-      "mcp__codegraph__codegraph_search",
-      "mcp__codegraph__codegraph_node",
-      "mcp__codegraph__codegraph_callers",
-      "mcp__codegraph__codegraph_callees",
-      "mcp__codegraph__codegraph_impact",
-      "mcp__codegraph__codegraph_files",
-      "mcp__codegraph__codegraph_status",
-      "Bash(tmux *)"
-    ],
-    "defaultMode": "auto"
-  },
-  "skillOverrides": {
-    "quarkclouddrive": "off"
-  },
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "statusLine": {
-    "command": "bash $HOME/.dotfiles/claude/statusline-command.sh",
-    "type": "command"
-  },
-  "theme": "auto",
   "worktree": {
     "baseRef": "head"
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash $HOME/.dotfiles/claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "dbhub@dbhub": true,
+    "jdtls-lsp@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "frontend-design@anthropic-plugin-directory": true
+  },
+  "extraKnownMarketplaces": {
+    "dbhub": {
+      "source": {
+        "source": "github",
+        "repo": "bytebase/dbhub"
+      }
+    }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "editorMode": "normal",
   "preferredNotifChannel": "terminal_bell"
 }
